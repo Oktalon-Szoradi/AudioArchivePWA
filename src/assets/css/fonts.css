@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'OpenSansLight';
+  src: url('../fonts/OpenSans-Light.woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: url('../fonts/OpenSans-Regular.woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'OpenSansMedium';
+  src: url('../fonts/OpenSans-Medium.woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url('../fonts/OpenSans-Bold.woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'OxygenLight';
+  src: url('../fonts/Oxygen-Light.ttf');
+}
+
+@font-face {
+  font-family: 'OxygenRegular';
+  src: url('../fonts/Oxygen-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OxygenBold';
+  src: url('../fonts/Oxygen-Bold.ttf');
+}

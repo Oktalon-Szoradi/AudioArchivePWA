@@ -1,0 +1,29 @@
+{
+  "name": "vv3-quasar-templ",
+  "version": "1.0.0",
+  "author": "Hossaini Hosain",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "standard . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "preview": "vite preview --port 5050"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.7",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "axios": "^1.5.1",
+    "pinia": "^2.1.7",
+    "quasar": "^2.13.0",
+    "vite": "^4.5.0",
+    "vue": "^3.3.6",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@quasar/vite-plugin": "^1.6.0",
+    "@rushstack/eslint-patch": "^1.5.1",
+    "autoprefixer": "^10.4.16",
+    "prettier": "^3.0.3",
+    "sass": "^1.32.12",
+    "standard": "^17.1.0"
+  }
+}
