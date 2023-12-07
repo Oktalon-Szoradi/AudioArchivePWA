@@ -49,6 +49,13 @@ body {
 .q-item.q-router-link--active {
 	color: white;
 }
+@media (max-width: 599px) {
+  .q-scrollarea__content {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .title {
 	position: absolute;
 	top: -0.425em;
