@@ -10,7 +10,63 @@
         virtual-scroll
         v-model:pagination="pagination"
         :rows-per-page-options="[0]"
+        :grid="$q.screen.lt.md"
       >
+        <template v-slot:item="props">
+          <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+            <q-card flat bordered>
+              <q-card-section horizontal class="justify-between">
+                <q-card-section>
+                  <strong class="text-h6">{{ props.row.name }}</strong>
+                </q-card-section>
+                <q-card-section>
+                  <span class="text-h6">
+                    {{
+                      `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}`
+                    }}
+                  </span>
+                </q-card-section>
+              </q-card-section>
+              <q-separator />
+              <q-card-section horizontal class="q-pa-md justify-between">
+                <div>{{ props.row.description }}</div>
+                <div>
+                  {{
+                    `${new Date(props.row.timestamp).toLocaleDateString()} ${new Date(
+                      props.row.timestamp
+                    ).toLocaleTimeString()}`
+                  }}
+                </div>
+              </q-card-section>
+              <q-card-section>
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="play_arrow"
+                  @click="someStore.playAudio(props.row)"
+                />
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="edit"
+                  @click="someStore.editAudio(props.row)"
+                />
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="delete"
+                  @click="someStore.deleteAudio(props.row)"
+                />
+              </q-card-section>
+            </q-card>
+          </div>
+        </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <q-btn
