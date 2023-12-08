@@ -5,7 +5,7 @@
 
       <q-toolbar-title>
         <q-avatar>
-          <img src="@/assets/img/AudioArchive_Logo.svg" />
+          <img src="/AudioArchive_Logo.svg" />
         </q-avatar>
         <span class="text-shadow q-ml-sm">{{ someStore.pwaTitle }}</span>
       </q-toolbar-title>
