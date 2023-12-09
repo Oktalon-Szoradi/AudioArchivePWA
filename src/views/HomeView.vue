@@ -2,7 +2,7 @@
   <div>
     <div class="title">Home</div>
     <div class="q-mt-md text-center">
-      <img src="@/assets/img/AudioArchive_Logo.svg" />
+      <img src="/AudioArchive_Logo.svg" />
       <h4>Welcome!</h4>
       <p>To begin recording, just press the microphone bubble below.</p>
       <p>Afterwards, you may give your recording a title, description, and a rating.</p>
