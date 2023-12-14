@@ -16,7 +16,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+console.log('Oktalon Szórádi')
+</script>
 
 <style scoped>
 * {
