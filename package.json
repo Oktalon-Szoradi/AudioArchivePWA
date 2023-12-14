@@ -1,7 +1,7 @@
 {
-  "name": "vv3-quasar-templ",
-  "version": "1.0.0",
-  "author": "Hossaini Hosain",
+  "name": "audioarchive",
+  "version": "0.1",
+  "author": "Oktalon Szórádi",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -24,6 +24,7 @@
     "autoprefixer": "^10.4.16",
     "prettier": "^3.0.3",
     "sass": "^1.32.12",
-    "standard": "^17.1.0"
+    "standard": "^17.1.0",
+    "vite-plugin-pwa": "^0.17.4"
   }
 }
