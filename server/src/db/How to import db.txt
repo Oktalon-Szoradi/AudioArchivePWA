@@ -1,0 +1,5 @@
+1. Open cmd or terminal
+2. Navigate to the folder where the exampleDB-movies.sql is located
+3. Type: psql -U postgres -d movies -f exampleDB-movies.sql
+4. Enter your password for the postgres user (default is postgres) and press enter
+5. Done :)

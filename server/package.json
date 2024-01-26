@@ -1,0 +1,28 @@
+{
+  "name": "express-templ",
+  "version": "1.0.0",
+  "description": "A web server with PostgreSQL integration responds to HTTP requests and stores data in a PostgreSQL database.",
+  "author": "Hossaini Hosain",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.js",
+    "lint": "eslint . --ext .js",
+    "start": "node ./src/app.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "is-my-json-valid": "^2.20.6",
+    "morgan": "^1.10.0",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.22"
+  }
+}
