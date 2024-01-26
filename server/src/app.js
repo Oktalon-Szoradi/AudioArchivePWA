@@ -3,7 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import path from 'path'
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js'
-import testRoute from './api/routes/test.route.js'
+import audioArchiveRoute from './api/routes/audioArchive.route.js'
 
 dotenv.config()
 
@@ -15,7 +15,7 @@ app.use(morgan('dev'))
 app.use(express.static(path.join(dirname, '/public')))
 app.use(express.json())
 
-app.use('/', testRoute)
+app.use('/audioarchive', audioArchiveRoute)
 app.use(errorHandler)
 app.use(notFoundHandler)
 
