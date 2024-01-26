@@ -1,11 +1,11 @@
-import express from 'express';
-import asyncHandler from 'express-async-handler';
-import { getTest, getMovies } from '../controllers/test.controller.js';
+import express from 'express'
+import asyncHandler from 'express-async-handler'
+import { getTest, getMovies } from '../controllers/test.controller.js'
 
-const router = express.Router();
+const router = express.Router()
 
 // Here come your routes
-router.get('/test', asyncHandler(getTest));
-router.get('/movies', asyncHandler(getMovies));
+router.get('/test', asyncHandler(getTest))
+router.get('/movies', asyncHandler(getMovies))
 
-export default router;
+export default router
