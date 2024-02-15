@@ -5,8 +5,8 @@ export const getAudiosDb = async () => {
   return result.rows
 }
 
-export const getAudioDb = async id => {
-  const result = await query('SELECT * FROM audios WHERE aid = $1;', [id])
+export const getAudioDb = async aid => {
+  const result = await query('SELECT * FROM audios WHERE aid = $1;', [aid])
   return result.rows[0]
 }
 

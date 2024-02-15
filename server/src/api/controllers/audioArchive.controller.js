@@ -6,8 +6,8 @@ export const getAudios = async (req, res) => {
 }
 
 export const getAudio = async (req, res) => {
-  const { id } = req.params
-  const audio = await model.getAudioDb(id)
+  const { aid } = req.params
+  const audio = await model.getAudioDb(aid)
   return res.status(200).json(audio)
 }
 
