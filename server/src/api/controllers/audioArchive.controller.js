@@ -10,3 +10,33 @@ export const getAudio = async (req, res) => {
   const audio = await model.getAudioDb(id)
   return res.status(200).json(audio)
 }
+
+const isNullOrWhitespace = string => {
+  return !string || string.trim().length === 0
+}
+
+export const addAudio = async (req, res) => {
+  const { name, description, timestamp, rating, audio } = req.body
+
+  const missingName = isNullOrWhitespace(name)
+  const missingTimestamp = isNullOrWhitespace(timestamp)
+  const missingAudio = isNullOrWhitespace(audio)
+
+  if (missingName || missingTimestamp || missingAudio) {
+    let whatIsMissing = 'Could not add audio due to missing parameters:'
+    if (missingName) whatIsMissing += ' name'
+    if (missingTimestamp) whatIsMissing += ' timestamp'
+    if (missingAudio) whatIsMissing += ' audio'
+    return res.status(400).json(whatIsMissing)
+  }
+
+  const addedAudio = await model.addAudioDb(
+    name,
+    description,
+    timestamp,
+    rating ?? 0,
+    audio
+  )
+
+  return res.status(201).json(addedAudio)
+}
