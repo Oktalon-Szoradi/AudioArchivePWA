@@ -13,6 +13,7 @@ export const getAudio = async (req, res) => {
 }
 
 const isNullOrWhitespace = string => {
+  string = toString(string)
   return !string || string.trim().length === 0
 }
 
