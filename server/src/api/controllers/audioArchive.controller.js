@@ -8,6 +8,7 @@ export const getAudios = async (req, res) => {
 export const getAudio = async (req, res) => {
   const { aid } = req.params
   const audio = await model.getAudioDb(aid)
+  if (!audio) return res.status(404).json('Audio not found')
   return res.status(200).json(audio)
 }
 
