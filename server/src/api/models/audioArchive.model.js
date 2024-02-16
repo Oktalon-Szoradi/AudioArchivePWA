@@ -57,3 +57,10 @@ export const updateAudioMetadataDb = async (aid, name, description, rating) => {
   const result = await query(queryString, queryValues)
   return result.rows[0]
 }
+
+export const deleteAudioDb = async aid => {
+  const result = await query('DELETE FROM audios WHERE aid = $1 RETURNING *;', [
+    aid
+  ])
+  return result.rows[0]
+}

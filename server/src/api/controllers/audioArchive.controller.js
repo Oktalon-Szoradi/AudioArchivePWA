@@ -64,3 +64,10 @@ export const updateAudioMetadata = async (req, res) => {
   if (!updatedAudio) return res.status(404).json('Audio not found')
   return res.status(200).json(updatedAudio)
 }
+
+export const deleteAudio = async (req, res) => {
+  const { aid } = req.params
+  const deletedAudio = await model.deleteAudioDb(aid)
+  if (!deletedAudio) return res.status(404).json('Audio not found')
+  return res.status(200).json(deletedAudio)
+}
