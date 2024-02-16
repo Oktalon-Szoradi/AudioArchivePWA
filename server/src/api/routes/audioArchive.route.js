@@ -7,5 +7,6 @@ const router = express.Router()
 router.get('/', asyncHandler(controller.getAudios))
 router.get('/:aid', asyncHandler(controller.getAudio))
 router.post('/', asyncHandler(controller.addAudio))
+router.patch('/:aid', asyncHandler(controller.updateAudioMetadata))
 
 export default router

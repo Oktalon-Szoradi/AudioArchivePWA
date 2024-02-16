@@ -42,3 +42,25 @@ export const addAudio = async (req, res) => {
 
   return res.status(201).json(addedAudio)
 }
+
+export const updateAudioMetadata = async (req, res) => {
+  const { aid } = req.params
+  const { name, description, rating } = req.body
+
+  if (
+    isNullOrWhitespace(name) &&
+    isNullOrWhitespace(description) &&
+    isNullOrWhitespace(rating)
+  ) {
+    return res.status(400).json('No metadata provided to update')
+  }
+
+  const updatedAudio = await model.updateAudioMetadataDb(
+    aid,
+    name,
+    description,
+    rating
+  )
+  if (!updatedAudio) return res.status(404).json('Audio not found')
+  return res.status(200).json(updatedAudio)
+}

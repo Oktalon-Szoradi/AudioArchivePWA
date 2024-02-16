@@ -28,3 +28,32 @@ export const addAudioDb = async (
   )
   return result.rows[0]
 }
+
+export const updateAudioMetadataDb = async (aid, name, description, rating) => {
+  let queryString = 'UPDATE audios SET '
+  const queryValues = []
+  let queryValueIndex = 1
+
+  if (name) {
+    queryString += `name = $${queryValueIndex}, `
+    queryValues.push(name)
+    queryValueIndex += 1
+  }
+  if (description) {
+    queryString += `description = $${queryValueIndex}, `
+    queryValues.push(description)
+    queryValueIndex += 1
+  }
+  if (rating) {
+    queryString += `rating = $${queryValueIndex}, `
+    queryValues.push(rating)
+    queryValueIndex += 1
+  }
+
+  queryString = queryString.slice(0, -2) // remove trailing comma and space
+  queryString += ` WHERE aid = $${queryValueIndex} RETURNING *;`
+  queryValues.push(aid)
+
+  const result = await query(queryString, queryValues)
+  return result.rows[0]
+}
