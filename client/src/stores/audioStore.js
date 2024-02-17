@@ -25,7 +25,19 @@ const useAudioStore = defineStore('AudioStore', () => {
     await fetchAudios()
   }
 
-  return { pwaTitle, audios, blobToBase64, fetchAudios, addAudio }
+  const deleteAudio = async id => {
+    await axios.delete(`/audioarchive/${id}`)
+    await fetchAudios()
+  }
+
+  return {
+    pwaTitle,
+    audios,
+    blobToBase64,
+    fetchAudios,
+    addAudio,
+    deleteAudio
+  }
 })
 
 export default useAudioStore
