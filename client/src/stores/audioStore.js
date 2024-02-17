@@ -6,22 +6,24 @@ const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive (prototype)')
   const audios = ref([])
 
-  const blobToBase64 = async blob => {
-    return new Promise((resolve, reject) => {
-      const reader = new window.FileReader()
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = error => reject(error)
-      reader.readAsDataURL(blob)
-    })
-  }
-
   const fetchAudios = async () => {
     const response = await axios.get('/audioarchive')
     audios.value = response.data
   }
 
-  const addAudio = async audio => {
-    await axios.post('/audioarchive', audio)
+  const addAudio = async (name, description, rating, timestamp, audio) => {
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('description', description)
+    formData.append('rating', rating)
+    formData.append('timestamp', timestamp.toISOString())
+    formData.append('audio', audio, name)
+
+    await axios.post('/audioarchive', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     await fetchAudios()
   }
 
@@ -33,7 +35,6 @@ const useAudioStore = defineStore('AudioStore', () => {
   return {
     pwaTitle,
     audios,
-    blobToBase64,
     fetchAudios,
     addAudio,
     deleteAudio

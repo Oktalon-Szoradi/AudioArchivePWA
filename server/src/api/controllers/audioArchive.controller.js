@@ -1,4 +1,13 @@
+import fs from 'fs'
+import { promisify } from 'util'
 import * as model from '../models/audioArchive.model.js'
+
+const readFile = promisify(fs.readFile)
+
+const isNullOrWhitespace = string => {
+  string = toString(string)
+  return !string || string.trim().length === 0
+}
 
 export const getAudios = async (req, res) => {
   const audios = await model.getAudiosDb()
@@ -12,25 +21,27 @@ export const getAudio = async (req, res) => {
   return res.status(200).json(audio)
 }
 
-const isNullOrWhitespace = string => {
-  string = toString(string)
-  return !string || string.trim().length === 0
-}
-
 export const addAudio = async (req, res) => {
-  const { name, description, timestamp, rating, audio } = req.body
+  const { name, description, timestamp, rating } = req.body
+  const audioFile = req.file
 
   const missingName = isNullOrWhitespace(name)
   const missingTimestamp = isNullOrWhitespace(timestamp)
-  const missingAudio = isNullOrWhitespace(audio)
+  const missingAudio = !audioFile
 
-  if (missingName || missingTimestamp || missingAudio) {
+  if (missingAudio) {
+    return res.status(400).json('No audio provided (it must be a file)')
+  }
+
+  if (missingName || missingTimestamp) {
     let whatIsMissing = 'Could not add audio due to missing parameters:'
     if (missingName) whatIsMissing += ' name'
     if (missingTimestamp) whatIsMissing += ' timestamp'
-    if (missingAudio) whatIsMissing += ' audio'
+    // if (missingAudio) whatIsMissing += ' audio'
     return res.status(400).json(whatIsMissing)
   }
+
+  const audio = await readFile(audioFile.path)
 
   const addedAudio = await model.addAudioDb(
     name,
@@ -39,6 +50,10 @@ export const addAudio = async (req, res) => {
     rating ?? 0,
     audio
   )
+
+  fs.unlink(audioFile.path, err => {
+    if (err) console.error(err)
+  })
 
   return res.status(201).json(addedAudio)
 }

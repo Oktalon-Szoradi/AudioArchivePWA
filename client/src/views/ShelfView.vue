@@ -21,9 +21,7 @@
                 </q-card-section>
                 <q-card-section>
                   <span class="text-h6">
-                    {{
-                      `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}`
-                    }}
+                    {{ `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}` }}
                   </span>
                 </q-card-section>
               </q-card-section>
@@ -55,6 +53,21 @@
         </template>
       </q-table>
     </div>
+    <q-dialog v-model="audioDialog">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">{{ selectedAudio.name }}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <audio :src="audioURL" controls />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Close" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -68,6 +81,22 @@ audioStore.fetchAudios()
 const pagination = ref({
   rowsPerPage: 0
 })
+const audioDialog = ref(false)
+const selectedAudio = ref(null)
+const audioURL = ref('')
+
+const playAudio = async audio => {
+  audioDialog.value = true
+  selectedAudio.value = audio
+
+  // Convert the audio data to a Blob
+  const audioBlob = new Blob([new Uint8Array(audio.audio.data)], { type: 'audio/ogg; codecs=opus' });
+
+  // Create an object URL from the Blob
+  const audioUrl = URL.createObjectURL(audioBlob);
+
+  console.log(audioUrl); // This URL can be used as the source for an audio element
+}
 
 const columns = [
   {
@@ -88,7 +117,7 @@ const columns = [
     name: 'rating',
     label: 'Rating',
     field: 'rating',
-    format: (val) => `${`★`.repeat(val)}${`☆`.repeat(5 - val)}`,
+    format: val => `${`★`.repeat(val)}${`☆`.repeat(5 - val)}`,
     align: 'left',
     sortable: true
   },
@@ -96,8 +125,7 @@ const columns = [
     name: 'timestamp',
     label: 'Time Created',
     field: 'timestamp',
-    format: (val) =>
-      `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
+    format: val => `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
     align: 'left',
     sortable: true
   },

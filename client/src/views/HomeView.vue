@@ -124,14 +124,7 @@ const toggleRecording = () => {
 }
 
 const saveAudio = async () => {
-  const audioEncodedAsBase64 = await audioStore.blobToBase64(blob.value)
-  audioStore.addAudio({
-    name: audioName.value,
-    description: audioDescription.value,
-    rating: audioRating.value,
-    timestamp: timeStamp.value,
-    audio: audioEncodedAsBase64
-  })
+  audioStore.addAudio(audioName.value, audioDescription.value, audioRating.value, timeStamp.value, blob.value)
   saveDialog.value = false
 }
 
