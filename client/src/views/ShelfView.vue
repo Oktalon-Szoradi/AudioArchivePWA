@@ -101,8 +101,8 @@
 </template>
 
 <script setup>
-import useAudioStore from '@/stores/audioStore.js'
 import { ref } from 'vue'
+import useAudioStore from '@/stores/audioStore.js'
 
 const audioStore = useAudioStore()
 audioStore.fetchAudios()

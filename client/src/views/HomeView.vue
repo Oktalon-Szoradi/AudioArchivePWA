@@ -65,7 +65,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { ref } from 'vue'
+import useAudioStore from '@/stores/audioStore.js'
 
 const audioStore = useAudioStore()
 
