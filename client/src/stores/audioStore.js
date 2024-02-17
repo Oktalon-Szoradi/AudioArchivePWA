@@ -21,8 +21,8 @@ const useAudioStore = defineStore('AudioStore', () => {
   }
 
   const addAudio = async audio => {
-    const response = await axios.post('/audioarchive', audio)
-    audios.value.push(response.data)
+    await axios.post('/audioarchive', audio)
+    await fetchAudios()
   }
 
   return { pwaTitle, audios, blobToBase64, fetchAudios, addAudio }
