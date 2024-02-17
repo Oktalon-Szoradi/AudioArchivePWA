@@ -65,9 +65,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import useDefaultStore from '@/stores/defaultStore.js'
+import { ref } from 'vue'
 
-const store = useDefaultStore()
+const audioStore = useAudioStore()
 
 let mediaRecorder,
   chunks = [],

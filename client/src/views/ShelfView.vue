@@ -4,7 +4,7 @@
     <div class="q-mt-xl text-center">
       <q-table
         class="audio-table"
-        :rows="someStore.audios"
+        :rows="audioStore.audios"
         :columns="columns"
         row-key="id"
         virtual-scroll
@@ -45,7 +45,7 @@
                   flat
                   round
                   icon="play_arrow"
-                  @click="someStore.playAudio(props.row)"
+                  @click="audioStore.playAudio(props.row)"
                 />
                 <q-btn
                   color="primary"
@@ -53,7 +53,7 @@
                   flat
                   round
                   icon="edit"
-                  @click="someStore.editAudio(props.row)"
+                  @click="audioStore.editAudio(props.row)"
                 />
                 <q-btn
                   color="primary"
@@ -61,7 +61,7 @@
                   flat
                   round
                   icon="delete"
-                  @click="someStore.deleteAudio(props.row)"
+                  @click="audioStore.deleteAudio(props.row)"
                 />
               </q-card-section>
             </q-card>
@@ -75,7 +75,7 @@
               flat
               round
               icon="play_arrow"
-              @click="someStore.playAudio(props.row)"
+              @click="audioStore.playAudio(props.row)"
             />
             <q-btn
               color="primary"
@@ -83,7 +83,7 @@
               flat
               round
               icon="edit"
-              @click="someStore.editAudio(props.row)"
+              @click="audioStore.editAudio(props.row)"
             />
             <q-btn
               color="primary"
@@ -91,7 +91,7 @@
               flat
               round
               icon="delete"
-              @click="someStore.deleteAudio(props.row)"
+              @click="audioStore.deleteAudio(props.row)"
             />
           </q-td>
         </template>
@@ -101,11 +101,11 @@
 </template>
 
 <script setup>
-import useSomeStore from '@/stores/someStore.js'
+import useAudioStore from '@/stores/audioStore.js'
 import { ref } from 'vue'
 
-const someStore = useSomeStore()
-someStore.fetchAudios()
+const audioStore = useAudioStore()
+audioStore.fetchAudios()
 
 const pagination = ref({
   rowsPerPage: 0

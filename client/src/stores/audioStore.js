@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
 
-const useSomeStore = defineStore('SomeStore', () => {
+const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive (prototype)')
   const audios = ref([])
 
@@ -16,4 +16,4 @@ const useSomeStore = defineStore('SomeStore', () => {
   return { pwaTitle, fetchAudios, audios }
 })
 
-export default useSomeStore
+export default useAudioStore
