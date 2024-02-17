@@ -39,60 +39,18 @@
                 </div>
               </q-card-section>
               <q-card-section>
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="play_arrow"
-                  @click="audioStore.playAudio(props.row)"
-                />
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="edit"
-                  @click="audioStore.editAudio(props.row)"
-                />
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="delete"
-                  @click="audioStore.deleteAudio(props.row)"
-                />
+                <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
+                <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+                <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
               </q-card-section>
             </q-card>
           </div>
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="play_arrow"
-              @click="audioStore.playAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="edit"
-              @click="audioStore.editAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="delete"
-              @click="audioStore.deleteAudio(props.row)"
-            />
+            <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
+            <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+            <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
           </q-td>
         </template>
       </q-table>
