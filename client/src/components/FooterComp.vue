@@ -7,16 +7,16 @@
         <q-avatar>
           <img src="/AudioArchive_Logo.svg" />
         </q-avatar>
-        <span class="text-shadow q-ml-sm">{{ someStore.pwaTitle }}</span>
+        <span class="text-shadow q-ml-sm">{{ audioStore.pwaTitle }}</span>
       </q-toolbar-title>
     </q-toolbar>
   </q-footer>
 </template>
 
 <script setup>
-import useSomeStore from '@/stores/someStore.js'
+import useaudioStore from '@/stores/audioStore.js'
 
-const someStore = useSomeStore()
+const audioStore = useaudioStore()
 
 defineEmits(['toggleLeftDrawer'])
 </script>
