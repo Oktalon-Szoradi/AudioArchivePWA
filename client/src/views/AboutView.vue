@@ -12,6 +12,11 @@
         This is currently a prototype. <br />
         Nothing is final.
       </p>
+      <p>
+        <a href="https://github.com/Oktalon-Szoradi/AudioArchivePWA" target="_blank">
+          GitHub Repository (opens in new tab)
+        </a>
+      </p>
     </div>
   </div>
 </template>
