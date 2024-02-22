@@ -75,6 +75,7 @@ let mediaRecorder,
 
 const mediaRecorderState = ref('inactive')
 const blob = ref(null)
+const audiomimetype = ref('')
 
 const timeStamp = ref(new Date())
 
@@ -99,11 +100,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       }
 
       mediaRecorder.onstop = async () => {
+        audiomimetype.value = mediaRecorder.mimeType || 'audio/ogg; codecs=opus'
+
         timeStamp.value = new Date()
         audioName.value = `Recording on ${timeStamp.value.toISOString()}`
-        blob.value = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
+
+        blob.value = new Blob(chunks, { type: audiomimetype.value })
         chunks = []
         audioURL = window.URL.createObjectURL(blob.value)
+
         saveDialog.value = true
       }
     })
@@ -124,7 +129,14 @@ const toggleRecording = () => {
 }
 
 const saveAudio = async () => {
-  audioStore.addAudio(audioName.value, audioDescription.value, audioRating.value, timeStamp.value, blob.value)
+  audioStore.addAudio(
+    audioName.value,
+    audioDescription.value,
+    audioRating.value,
+    timeStamp.value,
+    blob.value,
+    audiomimetype.value
+  )
   saveDialog.value = false
 }
 
