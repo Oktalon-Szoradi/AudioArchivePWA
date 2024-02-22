@@ -53,7 +53,8 @@ CREATE TABLE public.audios (
     description text,
     "timestamp" timestamp without time zone NOT NULL,
     rating integer,
-    audiopath text NOT NULL,
+    filename text NOT NULL,
+    mimetype text,
     CONSTRAINT "validRating" CHECK (((rating >= 0) AND (rating <= 5)))
 );
 
@@ -93,7 +94,7 @@ ALTER TABLE ONLY public.audios ALTER COLUMN aid SET DEFAULT nextval('public.audi
 -- Data for Name: audios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.audios (aid, name, description, "timestamp", rating, audiopath) FROM stdin;
+COPY public.audios (aid, name, description, "timestamp", rating, filename, mimetype) FROM stdin;
 \.
 
 
