@@ -6,25 +6,27 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "devhost": "vite --host",
     "lint": "standard . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "preview": "vite preview --port 5050"
+    "preview": "vite preview --port 5050",
+    "previewhost": "vite preview --port 5050 --host"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.9",
-    "@vitejs/plugin-vue": "^5.0.3",
+    "@vitejs/plugin-vue": "^5.0.4",
     "axios": "^1.6.7",
     "pinia": "^2.1.7",
-    "quasar": "^2.14.3",
-    "vite": "^5.0.12",
-    "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "quasar": "^2.14.5",
+    "vite": "^5.1.4",
+    "vue": "^3.4.19",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.6.0",
     "autoprefixer": "^10.4.17",
-    "prettier": "^3.2.4",
-    "sass": "^1.70.0",
+    "prettier": "^3.2.5",
+    "sass": "^1.71.1",
     "standard": "^17.1.0",
-    "vite-plugin-pwa": "^0.17.5"
+    "vite-plugin-pwa": "^0.19.0"
   }
 }
