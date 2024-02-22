@@ -15,17 +15,17 @@ export const addAudioDb = async (
   description,
   timestamp,
   rating,
-  audiopath,
-  audiomimetype
+  filename,
+  mimetype
 ) => {
   const result = await query(
     `
      INSERT INTO audios
-     (name, description, timestamp, rating, audiopath, audiomimetype)
+     (name, description, timestamp, rating, filename, mimetype)
      VALUES ($1, $2, $3, $4, $5, $6)
      RETURNING *;
     `,
-    [name, description, timestamp, rating, audiopath, audiomimetype]
+    [name, description, timestamp, rating, filename, mimetype]
   )
   return result.rows[0]
 }
