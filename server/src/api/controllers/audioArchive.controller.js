@@ -18,7 +18,7 @@ export const getAudio = async (req, res) => {
 }
 
 export const addAudio = async (req, res) => {
-  const { name, description, timestamp, rating } = req.body
+  const { name, description, timestamp, rating, audiomimetype } = req.body
   const audioFile = req.file
   const audioPath = audioFile.path
 
@@ -39,7 +39,8 @@ export const addAudio = async (req, res) => {
     description,
     timestamp,
     rating ?? 0,
-    audioPath
+    audioPath,
+    audiomimetype
   )
 
   return res.status(201).json(addedAudio)
