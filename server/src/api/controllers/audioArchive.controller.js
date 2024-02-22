@@ -1,8 +1,4 @@
-import fs from 'fs'
-import { promisify } from 'util'
 import * as model from '../models/audioArchive.model.js'
-
-const readFile = promisify(fs.readFile)
 
 const isNullOrWhitespace = string => {
   string = toString(string)
@@ -24,6 +20,7 @@ export const getAudio = async (req, res) => {
 export const addAudio = async (req, res) => {
   const { name, description, timestamp, rating } = req.body
   const audioFile = req.file
+  const audioPath = audioFile.path
 
   const missingName = isNullOrWhitespace(name)
   const missingTimestamp = isNullOrWhitespace(timestamp)
@@ -37,19 +34,13 @@ export const addAudio = async (req, res) => {
     return res.status(400).json(whatIsMissing)
   }
 
-  const audio = await readFile(audioFile.path)
-
   const addedAudio = await model.addAudioDb(
     name,
     description,
     timestamp,
     rating ?? 0,
-    audio
+    audioPath
   )
-
-  fs.unlink(audioFile.path, err => {
-    if (err) console.error(err)
-  })
 
   return res.status(201).json(addedAudio)
 }
