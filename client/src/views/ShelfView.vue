@@ -88,14 +88,9 @@ const audioURL = ref('')
 const playAudio = async audio => {
   audioDialog.value = true
   selectedAudio.value = audio
-
-  // Convert the audio data to a Blob
-  const audioBlob = new Blob([new Uint8Array(audio.audio.data)], { type: 'audio/ogg; codecs=opus' });
-
-  // Create an object URL from the Blob
-  const audioUrl = URL.createObjectURL(audioBlob);
-
-  console.log(audioUrl); // This URL can be used as the source for an audio element
+  const { filename, aid } = audio
+  const audioBlob = await audioStore.fetchAudioFile(filename, aid)
+  audioURL.value = URL.createObjectURL(audioBlob)
 }
 
 const columns = [
