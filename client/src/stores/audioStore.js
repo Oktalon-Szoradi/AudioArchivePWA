@@ -17,9 +17,9 @@ const useAudioStore = defineStore('AudioStore', () => {
     rating,
     timestamp,
     audio,
-    audiomimetype
+    mimetype
   ) => {
-    const audioFileExtension = audiomimetype.match(/\/(.*?);/)[1]
+    const audioFileExtension = mimetype.match(/\/(.*?);/)[1]
     const timestampAsISO = timestamp.toISOString()
     const timestampAsUnix = timestamp.getTime()
 
@@ -28,7 +28,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     formData.append('description', description)
     formData.append('rating', rating)
     formData.append('timestamp', timestampAsISO)
-    formData.append('audiomimetype', audiomimetype)
+    formData.append('mimetype', mimetype)
     formData.append(
       'audio',
       audio,
