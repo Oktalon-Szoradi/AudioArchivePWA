@@ -113,5 +113,12 @@ export const deleteAudio = async (req, res) => {
   const { aid } = req.params
   const deletedAudio = await model.deleteAudioDb(aid)
   if (!deletedAudio) return res.status(404).json('Audio not found')
+
+  const audioFileName = deletedAudio.filename
+  const audioFilePath = `uploads/${audioFileName}`
+  fs.unlink(audioFilePath, err => {
+    if (err) console.error('Error deleting audio file:', err)
+  })
+
   return res.status(200).json(deletedAudio)
 }
