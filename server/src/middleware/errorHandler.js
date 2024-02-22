@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, next) => {
 
 const notFoundHandler = (req, res, next) => {
   console.log(colors.blue(`Not found ===> ${req.originalUrl}`))
-  res.status(404).send('The ressource was not found on this server!')
+  res.status(404).send('The resource was not found on this server!')
   next()
 }
 

@@ -3,6 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import path from 'path'
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js'
+import { mebibytesToBytes } from './middleware/utils.js'
 import audioArchiveRoute from './api/routes/audioArchive.route.js'
 
 dotenv.config()
@@ -13,7 +14,7 @@ const app = express()
 
 app.use(morgan('dev'))
 app.use(express.static(path.join(dirname, '/public')))
-app.use(express.json())
+app.use(express.json({ limit: mebibytesToBytes(32) }))
 
 app.use('/audioarchive', audioArchiveRoute)
 app.use(errorHandler)

@@ -17,7 +17,7 @@
       </div>
       {{ mediaRecorderState }}
     </div>
-    <q-dialog v-model="dialog" persistent>
+    <q-dialog v-model="saveDialog" persistent>
       <q-card style="width: 50%">
         <q-card-section>
           <div class="text-h6">Add Recording Details</div>
@@ -29,14 +29,14 @@
           <q-form class="q-gutter-md">
             <q-input
               filled
-              v-model="title"
+              v-model="audioName"
               label="Audio Title"
               :rules="[val => (val && val.length > 0) || 'Please enter a title']"
             />
 
-            <q-input filled autogrow v-model="description" label="Audio Description" />
+            <q-input filled autogrow v-model="audioDescription" label="Audio Description" />
 
-            <q-rating v-model="rating" />
+            <q-rating v-model="audioRating" />
           </q-form>
         </q-card-section>
 
@@ -65,9 +65,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import useDefaultStore from '@/stores/defaultStore.js'
+import useAudioStore from '@/stores/audioStore.js'
 
-const store = useDefaultStore()
+const audioStore = useAudioStore()
 
 let mediaRecorder,
   chunks = [],
@@ -75,15 +75,16 @@ let mediaRecorder,
 
 const mediaRecorderState = ref('inactive')
 const blob = ref(null)
+const audiomimetype = ref('')
 
 const timeStamp = ref(new Date())
 
-const dialog = ref(false)
+const saveDialog = ref(false)
 const cancelConfirmation = ref(false)
 
-const title = ref(`Recording on ${timeStamp.value.toISOString()}`)
-const description = ref('')
-const rating = ref(0)
+const audioName = ref('')
+const audioDescription = ref('')
+const audioRating = ref(0)
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices
@@ -98,12 +99,17 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.log(e)
       }
 
-      mediaRecorder.onstop = () => {
+      mediaRecorder.onstop = async () => {
+        audiomimetype.value = mediaRecorder.mimeType || 'audio/ogg; codecs=opus'
+
         timeStamp.value = new Date()
-        blob.value = new Blob(chunks, { type: 'audio/ogg; codecs=opus' })
+        audioName.value = `Recording on ${timeStamp.value.toISOString()}`
+
+        blob.value = new Blob(chunks, { type: audiomimetype.value })
         chunks = []
         audioURL = window.URL.createObjectURL(blob.value)
-        dialog.value = true
+
+        saveDialog.value = true
       }
     })
     .catch(error => {
@@ -122,8 +128,16 @@ const toggleRecording = () => {
   mediaRecorderState.value = mediaRecorder.state
 }
 
-const saveAudio = () => {
-  dialog.value = false
+const saveAudio = async () => {
+  audioStore.addAudio(
+    audioName.value,
+    audioDescription.value,
+    audioRating.value,
+    timeStamp.value,
+    blob.value,
+    audiomimetype.value
+  )
+  saveDialog.value = false
 }
 
 const cancelAudio = () => {
@@ -132,10 +146,10 @@ const cancelAudio = () => {
 
 const ultimatelyCancel = () => {
   cancelConfirmation.value = false
-  dialog.value = false
-  title.value = `Recording on ${timeStamp.value.toISOString()}`
-  description.value = ''
-  rating.value = 0
+  saveDialog.value = false
+  audioName.value = ''
+  audioDescription.value = ''
+  audioRating.value = 0
 }
 </script>
 

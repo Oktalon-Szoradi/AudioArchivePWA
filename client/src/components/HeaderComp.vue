@@ -7,7 +7,7 @@
         <q-avatar>
           <img src="/AudioArchive_Logo.svg" />
         </q-avatar>
-        <span class="text-shadow q-ml-sm">{{ someStore.pwaTitle }}</span>
+        <span class="text-shadow q-ml-sm">{{ audioStore.pwaTitle }}</span>
       </q-toolbar-title>
     </q-toolbar>
 
@@ -19,9 +19,9 @@
 </template>
 
 <script setup>
-import useSomeStore from '@/stores/someStore.js'
+import useaudioStore from '@/stores/audioStore.js'
 
-const someStore = useSomeStore()
+const audioStore = useaudioStore()
 
 defineEmits(['toggleLeftDrawer'])
 </script>
@@ -29,11 +29,7 @@ defineEmits(['toggleLeftDrawer'])
 <style scoped>
 .navHeader {
   background-color: transparent;
-  background-image: linear-gradient(
-    to right,
-    hsla(243, 56%, 54%, 50%),
-    hsla(243, 56%, 64%, 50%)
-  );
+  background-image: linear-gradient(to right, hsla(243, 56%, 54%, 50%), hsla(243, 56%, 64%, 50%));
   backdrop-filter: blur(8px);
 }
 </style>

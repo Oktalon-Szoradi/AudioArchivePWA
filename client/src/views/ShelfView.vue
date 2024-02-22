@@ -4,7 +4,7 @@
     <div class="q-mt-xl text-center">
       <q-table
         class="audio-table"
-        :rows="someStore.audios"
+        :rows="audioStore.audios"
         :columns="columns"
         row-key="id"
         virtual-scroll
@@ -21,9 +21,7 @@
                 </q-card-section>
                 <q-card-section>
                   <span class="text-h6">
-                    {{
-                      `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}`
-                    }}
+                    {{ `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}` }}
                   </span>
                 </q-card-section>
               </q-card-section>
@@ -39,77 +37,61 @@
                 </div>
               </q-card-section>
               <q-card-section>
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="play_arrow"
-                  @click="someStore.playAudio(props.row)"
-                />
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="edit"
-                  @click="someStore.editAudio(props.row)"
-                />
-                <q-btn
-                  color="primary"
-                  dense
-                  flat
-                  round
-                  icon="delete"
-                  @click="someStore.deleteAudio(props.row)"
-                />
+                <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
+                <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+                <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
               </q-card-section>
             </q-card>
           </div>
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="play_arrow"
-              @click="someStore.playAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="edit"
-              @click="someStore.editAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="delete"
-              @click="someStore.deleteAudio(props.row)"
-            />
+            <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
+            <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+            <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
           </q-td>
         </template>
       </q-table>
     </div>
+    <q-dialog v-model="audioDialog">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">{{ selectedAudio.name }}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <audio :src="audioURL" controls />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Close" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script setup>
-import useSomeStore from '@/stores/someStore.js'
 import { ref } from 'vue'
+import useAudioStore from '@/stores/audioStore.js'
 
-const someStore = useSomeStore()
-someStore.fetchAudios()
+const audioStore = useAudioStore()
+audioStore.fetchAudios()
 
 const pagination = ref({
   rowsPerPage: 0
 })
+const audioDialog = ref(false)
+const selectedAudio = ref(null)
+const audioURL = ref('')
+
+const playAudio = async audio => {
+  audioDialog.value = true
+  selectedAudio.value = audio
+  const { filename, aid } = audio
+  const audioBlob = await audioStore.fetchAudioFile(filename, aid)
+  audioURL.value = URL.createObjectURL(audioBlob)
+}
 
 const columns = [
   {
@@ -130,7 +112,7 @@ const columns = [
     name: 'rating',
     label: 'Rating',
     field: 'rating',
-    format: (val) => `${`★`.repeat(val)}${`☆`.repeat(5 - val)}`,
+    format: val => `${`★`.repeat(val)}${`☆`.repeat(5 - val)}`,
     align: 'left',
     sortable: true
   },
@@ -138,8 +120,7 @@ const columns = [
     name: 'timestamp',
     label: 'Time Created',
     field: 'timestamp',
-    format: (val) =>
-      `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
+    format: val => `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
     align: 'left',
     sortable: true
   },
