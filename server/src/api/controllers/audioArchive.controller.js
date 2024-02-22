@@ -1,3 +1,4 @@
+import fs from 'fs'
 import * as model from '../models/audioArchive.model.js'
 
 const isNullOrWhitespace = string => {
@@ -15,6 +16,39 @@ export const getAudioMetadata = async (req, res) => {
   const audio = await model.getAudioMetadataDb(aid)
   if (!audio) return res.status(404).json('Audio not found')
   return res.status(200).json(audio)
+}
+
+export const getAudioFile = async (req, res) => {
+  const { filename } = req.params
+  const { aid } = req.query
+  const filepath = `uploads/${filename}`
+
+  let audioMetadata
+  let fileExtension
+
+  if (aid) {
+    audioMetadata = await model.getAudioMetadataDb(aid)
+    fileExtension = audioMetadata.mimetype.match(/\/(.*?);/)[1]
+  }
+
+  if (!fileExtension) {
+    try {
+      const fileExtensionRegExp = filepath.match(/\.([^.]+)$/)
+      fileExtension = fileExtensionRegExp[1]
+    } catch (error) {
+      fileExtension = '*'
+      console.warn(
+        'getAudioFile Warning: Could not detect file extension for the purpose of the Content-Type HTTP Header. Using wildcard/generic MIME type (*).'
+      )
+    }
+  }
+
+  fs.readFile(filepath, async (err, data) => {
+    if (err) return res.status(404).json('Audio file not found')
+
+    res.setHeader('Content-Type', `audio/${fileExtension}`)
+    res.send(data)
+  })
 }
 
 export const addAudio = async (req, res) => {
