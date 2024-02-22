@@ -5,14 +5,14 @@ const isNullOrWhitespace = string => {
   return !string || string.trim().length === 0
 }
 
-export const getAudios = async (req, res) => {
-  const audios = await model.getAudiosDb()
+export const getAllAudioMetadata = async (req, res) => {
+  const audios = await model.getAllAudioMetadataDb()
   return res.status(200).json(audios)
 }
 
-export const getAudio = async (req, res) => {
+export const getAudioMetadata = async (req, res) => {
   const { aid } = req.params
-  const audio = await model.getAudioDb(aid)
+  const audio = await model.getAudioMetadataDb(aid)
   if (!audio) return res.status(404).json('Audio not found')
   return res.status(200).json(audio)
 }

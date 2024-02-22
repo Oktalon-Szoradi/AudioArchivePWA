@@ -15,8 +15,8 @@ const upload = multer({
   storage: storageEngine
 })
 
-router.get('/', asyncHandler(controller.getAudios))
-router.get('/:aid', asyncHandler(controller.getAudio))
+router.get('/', asyncHandler(controller.getAllAudioMetadata))
+router.get('/:aid', asyncHandler(controller.getAudioMetadata))
 router.post('/', upload.single('audio'), asyncHandler(controller.addAudio))
 router.patch('/:aid', asyncHandler(controller.updateAudioMetadata))
 router.delete('/:aid', asyncHandler(controller.deleteAudio))

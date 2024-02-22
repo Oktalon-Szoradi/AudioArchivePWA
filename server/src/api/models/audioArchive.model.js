@@ -1,11 +1,11 @@
 import query from '../../db/index.js'
 
-export const getAudiosDb = async () => {
+export const getAllAudioMetadataDb = async () => {
   const result = await query('SELECT * FROM audios;')
   return result.rows
 }
 
-export const getAudioDb = async aid => {
+export const getAudioMetadataDb = async aid => {
   const result = await query('SELECT * FROM audios WHERE aid = $1;', [aid])
   return result.rows[0]
 }
