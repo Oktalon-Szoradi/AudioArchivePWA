@@ -29,15 +29,11 @@ export const addAudio = async (req, res) => {
   const missingTimestamp = isNullOrWhitespace(timestamp)
   const missingAudio = !audioFile
 
-  if (missingAudio) {
-    return res.status(400).json('No audio provided (it must be a file)')
-  }
-
-  if (missingName || missingTimestamp) {
-    let whatIsMissing = 'Could not add audio due to missing parameters:'
-    if (missingName) whatIsMissing += ' name'
-    if (missingTimestamp) whatIsMissing += ' timestamp'
-    // if (missingAudio) whatIsMissing += ' audio'
+  if (missingName || missingTimestamp || missingAudio) {
+    let whatIsMissing = 'Could not add audio because the following are missing:'
+    if (missingName) whatIsMissing += ' name (parameter)'
+    if (missingTimestamp) whatIsMissing += ' timestamp (parameter)'
+    if (missingAudio) whatIsMissing += ' audio (file)'
     return res.status(400).json(whatIsMissing)
   }
 
