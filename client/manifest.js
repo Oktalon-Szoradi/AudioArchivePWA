@@ -9,6 +9,11 @@ export default {
   theme_color: '#ffffff',
   id: '/',
   icons: [
-    { src: '/AudioArchive_Logo.svg', type: 'image/svg+xml' }
+    {
+      src: '/AudioArchive_Logo.svg',
+      sizes: '144x144',
+      type: 'image/svg+xml',
+      purpose: 'any'
+    }
   ]
 }
