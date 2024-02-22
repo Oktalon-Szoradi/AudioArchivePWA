@@ -6,8 +6,10 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "devhost": "vite --host",
     "lint": "standard . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "preview": "vite preview --port 5050"
+    "preview": "vite preview --port 5050",
+    "previewhost": "vite preview --port 5050 --host"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.9",
