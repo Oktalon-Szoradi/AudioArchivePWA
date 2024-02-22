@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.5 (Debian 15.5-1.pgdg120+1)
--- Dumped by pg_dump version 16.1 (Debian 16.1-1.pgdg120+1)
+-- Dumped from database version 15.6 (Debian 15.6-1.pgdg120+2)
+-- Dumped by pg_dump version 16.2 (Debian 16.2-1.pgdg120+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -49,11 +49,11 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.audios (
     aid integer NOT NULL,
-    name character varying NOT NULL,
+    name text NOT NULL,
     description text,
-    "timestamp" timestamp with time zone NOT NULL,
+    "timestamp" timestamp without time zone NOT NULL,
     rating integer,
-    audio bytea NOT NULL,
+    audiopath text NOT NULL,
     CONSTRAINT "validRating" CHECK (((rating >= 0) AND (rating <= 5)))
 );
 
@@ -93,7 +93,7 @@ ALTER TABLE ONLY public.audios ALTER COLUMN aid SET DEFAULT nextval('public.audi
 -- Data for Name: audios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.audios (aid, name, description, "timestamp", rating, audio) FROM stdin;
+COPY public.audios (aid, name, description, "timestamp", rating, audiopath) FROM stdin;
 \.
 
 
