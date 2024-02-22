@@ -20,7 +20,6 @@ export const getAudio = async (req, res) => {
 export const addAudio = async (req, res) => {
   const { name, description, timestamp, rating, audiomimetype } = req.body
   const audioFile = req.file
-  const audioPath = audioFile.path
 
   const missingName = isNullOrWhitespace(name)
   const missingTimestamp = isNullOrWhitespace(timestamp)
@@ -33,6 +32,8 @@ export const addAudio = async (req, res) => {
     if (missingAudio) whatIsMissing += ' audio (file)'
     return res.status(400).json(whatIsMissing)
   }
+
+  const audioPath = audioFile.path
 
   const addedAudio = await model.addAudioDb(
     name,
