@@ -11,6 +11,13 @@ const useAudioStore = defineStore('AudioStore', () => {
     audios.value = response.data
   }
 
+  const fetchAudioFile = async (filename, aid) => {
+    const response = await axios.get(`/audioarchive/audio/${filename}?aid=${aid}`, {
+      responseType: 'blob'
+    })
+    return response.data
+  }
+
   const addAudio = async (
     name,
     description,
@@ -52,6 +59,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     pwaTitle,
     audios,
     fetchAudios,
+    fetchAudioFile,
     addAudio,
     deleteAudio
   }
