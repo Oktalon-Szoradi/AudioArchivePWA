@@ -8,4 +8,7 @@ I've chosen to make a web app where you can **record** something with your devic
 - Play it back with controls (and maybe even a cool visualisation)
 - Export it to different formats (mp3, wav, ogg, flac, ...)
 
-Shoutouts to [Hosain](https://github.com/hossaini310) for making the Vue + Quasar template~
+The SQL database dump (currently without test data) is located in:  
+`server/src/db/AudioArchiveDB.sql`
+
+Shoutouts to [Hosain](https://github.com/hossaini310) for making the Vue + Quasar template
