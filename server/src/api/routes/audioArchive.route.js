@@ -4,7 +4,16 @@ import multer from 'multer'
 import * as controller from '../controllers/audioArchive.controller.js'
 
 const router = express.Router()
-const upload = multer({ dest: 'uploads/' })
+
+const storageEngine = multer.diskStorage({
+  destination: 'uploads/',
+  filename (req, file, cb) {
+    cb(null, `${Date.now()}--${file.originalname}`)
+  }
+})
+const upload = multer({
+  storage: storageEngine
+})
 
 router.get('/', asyncHandler(controller.getAudios))
 router.get('/:aid', asyncHandler(controller.getAudio))
