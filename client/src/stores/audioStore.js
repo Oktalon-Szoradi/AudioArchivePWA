@@ -11,13 +11,29 @@ const useAudioStore = defineStore('AudioStore', () => {
     audios.value = response.data
   }
 
-  const addAudio = async (name, description, rating, timestamp, audio) => {
+  const addAudio = async (
+    name,
+    description,
+    rating,
+    timestamp,
+    audio,
+    audiomimetype
+  ) => {
+    const audioFileExtension = audiomimetype.match(/\/(.*?);/)[1]
+    const timestampAsISO = timestamp.toISOString()
+    const timestampAsUnix = timestamp.getTime()
+
     const formData = new FormData()
     formData.append('name', name)
     formData.append('description', description)
     formData.append('rating', rating)
-    formData.append('timestamp', timestamp.toISOString())
-    formData.append('audio', audio, name)
+    formData.append('timestamp', timestampAsISO)
+    formData.append('audiomimetype', audiomimetype)
+    formData.append(
+      'audio',
+      audio,
+      `${timestampAsUnix}--${name}.${audioFileExtension}`
+    )
 
     await axios.post('/audioarchive', formData, {
       headers: {
