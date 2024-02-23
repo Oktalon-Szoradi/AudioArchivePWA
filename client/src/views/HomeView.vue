@@ -128,6 +128,12 @@ const toggleRecording = () => {
   mediaRecorderState.value = mediaRecorder.state
 }
 
+const resetFields = () => {
+  audioName.value = ''
+  audioDescription.value = ''
+  audioRating.value = 0
+}
+
 const saveAudio = async () => {
   audioStore.addAudio(
     audioName.value,
@@ -138,6 +144,7 @@ const saveAudio = async () => {
     audiomimetype.value
   )
   saveDialog.value = false
+  resetFields()
 }
 
 const cancelAudio = () => {
@@ -147,9 +154,7 @@ const cancelAudio = () => {
 const ultimatelyCancel = () => {
   cancelConfirmation.value = false
   saveDialog.value = false
-  audioName.value = ''
-  audioDescription.value = ''
-  audioRating.value = 0
+  resetFields()
 }
 </script>
 
