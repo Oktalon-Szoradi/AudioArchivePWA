@@ -39,7 +39,7 @@
               <q-card-section>
                 <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
                 <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
-                <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
+                <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
               </q-card-section>
             </q-card>
           </div>
@@ -48,7 +48,7 @@
           <q-td :props="props">
             <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
             <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
-            <q-btn color="primary" dense flat round icon="delete" @click="audioStore.deleteAudio(props.row.aid)" />
+            <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
           </q-td>
         </template>
       </q-table>
@@ -68,6 +68,20 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+    <q-dialog v-model="deleteDialog" persistent>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Are you sure you want to delete {{ selectedAudio.name }}?</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none"> It cannot be brought back! </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn label="Yes" color="primary" @click="audioStore.deleteAudio(selectedAudio.aid)" v-close-popup />
+          <q-btn flat label="No" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -81,7 +95,10 @@ audioStore.fetchAudios()
 const pagination = ref({
   rowsPerPage: 0
 })
+
 const audioDialog = ref(false)
+const deleteDialog = ref(false)
+
 const selectedAudio = ref(null)
 const audioURL = ref('')
 
@@ -91,6 +108,11 @@ const playAudio = async audio => {
   const { filename, aid } = audio
   const audioBlob = await audioStore.fetchAudioFile(filename, aid)
   audioURL.value = URL.createObjectURL(audioBlob)
+}
+
+const promptDelete = audio => {
+  selectedAudio.value = audio
+  deleteDialog.value = true
 }
 
 const columns = [
