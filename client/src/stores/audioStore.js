@@ -12,9 +12,12 @@ const useAudioStore = defineStore('AudioStore', () => {
   }
 
   const fetchAudioFile = async (filename, aid) => {
-    const response = await axios.get(`/audioarchive/audio/${filename}?aid=${aid}`, {
-      responseType: 'blob'
-    })
+    const response = await axios.get(
+      `/audioarchive/audio/${filename}?aid=${aid}`,
+      {
+        responseType: 'blob'
+      }
+    )
     return response.data
   }
 
@@ -50,6 +53,11 @@ const useAudioStore = defineStore('AudioStore', () => {
     await fetchAudios()
   }
 
+  const updateAudio = async newAudio => {
+    await axios.patch(`/audioarchive/${newAudio.aid}`, newAudio)
+    await fetchAudios()
+  }
+
   const deleteAudio = async id => {
     await axios.delete(`/audioarchive/${id}`)
     await fetchAudios()
@@ -61,6 +69,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     fetchAudios,
     fetchAudioFile,
     addAudio,
+    updateAudio,
     deleteAudio
   }
 })

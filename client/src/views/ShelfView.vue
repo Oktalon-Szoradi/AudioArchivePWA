@@ -38,7 +38,7 @@
               </q-card-section>
               <q-card-section>
                 <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
-                <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+                <q-btn color="primary" dense flat round icon="edit" @click="editAudio(props.row)" />
                 <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
               </q-card-section>
             </q-card>
@@ -47,7 +47,7 @@
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
-            <q-btn color="primary" dense flat round icon="edit" @click="audioStore.editAudio(props.row)" />
+            <q-btn color="primary" dense flat round icon="edit" @click="editAudio(props.row)" />
             <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
           </q-td>
         </template>
@@ -82,6 +82,33 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+    <q-dialog v-model="editDialog">
+      <q-card style="width: 50%">
+        <q-card-section>
+          <div class="text-h6">Edit {{ selectedAudio.name }}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none text-center">
+          <q-form class="q-gutter-md">
+            <q-input
+              filled
+              v-model="newAudioName"
+              label="New Audio Title"
+              :rules="[val => (val && val.length > 0) || 'Please enter a title']"
+            />
+
+            <q-input filled autogrow v-model="newAudioDescription" label="New Audio Description" />
+
+            <q-rating v-model="newAudioRating" />
+          </q-form>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn label="Update" color="primary" @click="updateAudio(selectedAudio)" v-close-popup />
+          <q-btn flat label="Cancel" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -98,6 +125,11 @@ const pagination = ref({
 
 const audioDialog = ref(false)
 const deleteDialog = ref(false)
+const editDialog = ref(false)
+
+const newAudioName = ref('')
+const newAudioDescription = ref('')
+const newAudioRating = ref(0)
 
 const selectedAudio = ref(null)
 const audioURL = ref('')
@@ -113,6 +145,22 @@ const playAudio = async audio => {
 const promptDelete = audio => {
   selectedAudio.value = audio
   deleteDialog.value = true
+}
+
+const editAudio = audio => {
+  selectedAudio.value = audio
+  newAudioName.value = audio.name
+  newAudioDescription.value = audio.description
+  newAudioRating.value = audio.rating
+  editDialog.value = true
+}
+
+const updateAudio = () => {
+  selectedAudio.value.name = newAudioName.value
+  selectedAudio.value.description = newAudioDescription.value
+  selectedAudio.value.rating = newAudioRating.value
+  audioStore.updateAudio(selectedAudio.value)
+  editDialog.value = false
 }
 
 const columns = [
