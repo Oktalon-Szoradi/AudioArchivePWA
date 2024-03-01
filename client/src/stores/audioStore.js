@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
+import { formatISO9075 } from 'date-fns'
 
 const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive (prototype)')
@@ -12,9 +13,12 @@ const useAudioStore = defineStore('AudioStore', () => {
   }
 
   const fetchAudioFile = async (filename, aid) => {
-    const response = await axios.get(`/audioarchive/audio/${filename}?aid=${aid}`, {
-      responseType: 'blob'
-    })
+    const response = await axios.get(
+      `/audioarchive/audio/${filename}?aid=${aid}`,
+      {
+        responseType: 'blob'
+      }
+    )
     return response.data
   }
 
@@ -27,7 +31,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     mimetype
   ) => {
     const audioFileExtension = mimetype.match(/\/(.*?);/)[1]
-    const timestampAsISO = timestamp.toISOString()
+    const timestampAsISO = formatISO9075(timestamp)
     const timestampAsUnix = timestamp.getTime()
 
     const formData = new FormData()
@@ -50,6 +54,11 @@ const useAudioStore = defineStore('AudioStore', () => {
     await fetchAudios()
   }
 
+  const updateAudio = async newAudio => {
+    await axios.patch(`/audioarchive/${newAudio.aid}`, newAudio)
+    await fetchAudios()
+  }
+
   const deleteAudio = async id => {
     await axios.delete(`/audioarchive/${id}`)
     await fetchAudios()
@@ -61,6 +70,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     fetchAudios,
     fetchAudioFile,
     addAudio,
+    updateAudio,
     deleteAudio
   }
 })
