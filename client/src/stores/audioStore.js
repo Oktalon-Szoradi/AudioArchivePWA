@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
+import { formatISO9075 } from 'date-fns'
 
 const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive (prototype)')
@@ -30,7 +31,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     mimetype
   ) => {
     const audioFileExtension = mimetype.match(/\/(.*?);/)[1]
-    const timestampAsISO = timestamp.toISOString()
+    const timestampAsISO = formatISO9075(timestamp)
     const timestampAsUnix = timestamp.getTime()
 
     const formData = new FormData()

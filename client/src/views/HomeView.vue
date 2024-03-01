@@ -66,6 +66,7 @@
 <script setup>
 import { ref } from 'vue'
 import useAudioStore from '@/stores/audioStore.js'
+import { formatISO9075 } from 'date-fns'
 
 const audioStore = useAudioStore()
 
@@ -103,7 +104,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         audiomimetype.value = mediaRecorder.mimeType || 'audio/ogg; codecs=opus'
 
         timeStamp.value = new Date()
-        audioName.value = `Recording on ${timeStamp.value.toISOString()}`
+        audioName.value = `Recording on ${formatISO9075(timeStamp.value)}`
 
         blob.value = new Blob(chunks, { type: audiomimetype.value })
         chunks = []
