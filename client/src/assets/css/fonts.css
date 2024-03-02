@@ -44,3 +44,9 @@
   font-family: 'OxygenBold';
   src: url('../fonts/Oxygen-Bold.ttf');
 }
+
+@font-face {
+  /* https://www.1001fonts.com/e1234-font.html */
+  font-family: 'StopWatch';
+  src: url('../fonts/E1234.ttf');
+}
