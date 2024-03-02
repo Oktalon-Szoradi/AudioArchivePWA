@@ -115,6 +115,7 @@
 <script setup>
 import { ref } from 'vue'
 import useAudioStore from '@/stores/audioStore.js'
+import { formatISO9075 } from 'date-fns'
 
 const audioStore = useAudioStore()
 audioStore.fetchAudios()
@@ -190,7 +191,8 @@ const columns = [
     name: 'timestamp',
     label: 'Time Created',
     field: 'timestamp',
-    format: val => `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
+    // format: val => `${new Date(val).toLocaleDateString()} ${new Date(val).toLocaleTimeString()}`,
+    format: val => formatISO9075(val),
     align: 'left',
     sortable: true
   },
