@@ -6,16 +6,7 @@
       <h4>Welcome!</h4>
       <p>To begin recording, just press the microphone bubble below.</p>
       <p>Afterwards, you may give your recording a title, description, and a rating.</p>
-      <div class="q-mt-xl row justify-center">
-        <div
-          class="microphone-bubble"
-          :class="mediaRecorderState !== 'inactive' ? 'microphone-bubble-active' : ''"
-          @click="toggleRecording()"
-        >
-          <q-icon name="mic" color="white" size="5em" />
-        </div>
-      </div>
-      {{ mediaRecorderState }}
+      <RecordingCompVue @recording-complete="promptSave" />
     </div>
     <q-dialog v-model="saveDialog" persistent>
       <q-card style="width: 50%">
@@ -66,73 +57,40 @@
 <script setup>
 import { ref } from 'vue'
 import useAudioStore from '@/stores/audioStore.js'
-import { formatISO9075 } from 'date-fns'
+import RecordingCompVue from '@/components/RecordingComp.vue'
 
 const audioStore = useAudioStore()
 
-let mediaRecorder,
-  chunks = [],
-  audioURL = ''
-
-const mediaRecorderState = ref('inactive')
-const blob = ref(null)
-const audiomimetype = ref('')
-
-const timeStamp = ref(new Date())
-
-const saveDialog = ref(false)
-const cancelConfirmation = ref(false)
+const audioURL = ref('')
+const audioTimeStamp = ref('')
+const audioMimeType = ref('')
+const audioBlob = ref('')
 
 const audioName = ref('')
 const audioDescription = ref('')
 const audioRating = ref(0)
 
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices
-    .getUserMedia({
-      audio: true
-    })
-    .then(stream => {
-      mediaRecorder = new MediaRecorder(stream)
+const saveDialog = ref(false)
+const cancelConfirmation = ref(false)
 
-      mediaRecorder.ondataavailable = e => {
-        chunks.push(e.data)
-        console.log(e)
-      }
-
-      mediaRecorder.onstop = async () => {
-        audiomimetype.value = mediaRecorder.mimeType || 'audio/ogg; codecs=opus'
-
-        timeStamp.value = new Date()
-        audioName.value = `Recording on ${formatISO9075(timeStamp.value)}`
-
-        blob.value = new Blob(chunks, { type: audiomimetype.value })
-        chunks = []
-        audioURL = window.URL.createObjectURL(blob.value)
-
-        saveDialog.value = true
-      }
-    })
-    .catch(error => {
-      console.error('navigator.mediaDevices ran into an error:', error)
-    })
-}
-
-const toggleRecording = () => {
-  if (mediaRecorder.state === 'inactive') {
-    mediaRecorder.start()
-    console.info('Recording started')
-  } else {
-    mediaRecorder.stop()
-    console.info('Recording stopped')
-  }
-  mediaRecorderState.value = mediaRecorder.state
+const promptSave = ({ url, name, timeStamp, blob, mimeType }) => {
+  audioURL.value = url
+  audioName.value = name
+  audioTimeStamp.value = timeStamp
+  audioBlob.value = blob
+  audioMimeType.value = mimeType
+  saveDialog.value = true
 }
 
 const resetFields = () => {
   audioName.value = ''
   audioDescription.value = ''
   audioRating.value = 0
+
+  audioURL.value = ''
+  audioTimeStamp.value = ''
+  audioMimeType.value = ''
+  audioBlob.value = ''
 }
 
 const saveAudio = async () => {
@@ -140,9 +98,9 @@ const saveAudio = async () => {
     audioName.value,
     audioDescription.value,
     audioRating.value,
-    timeStamp.value,
-    blob.value,
-    audiomimetype.value
+    audioTimeStamp.value,
+    audioBlob.value,
+    audioMimeType.value
   )
   saveDialog.value = false
   resetFields()
@@ -167,41 +125,5 @@ img {
   width: 50vw;
   max-width: 256px;
   height: auto;
-}
-.microphone-bubble {
-  position: relative;
-  margin: 1em;
-  border-radius: 50%;
-  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 50%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 60%), hsl(243, 56%, 40%));
-  width: 10em;
-  height: 10em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.microphone-bubble::after {
-  position: absolute;
-  top: 0;
-  left: 15%;
-  border-radius: 50%;
-  background-image: radial-gradient(circle at 50% 100%, hsla(0, 0%, 100%, 0%), hsla(0, 0%, 100%, 75%));
-  width: 70%;
-  height: 50%;
-  content: '';
-}
-.microphone-bubble > * {
-  opacity: 75%;
-}
-.microphone-bubble:hover {
-  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 60%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 70%), hsl(243, 56%, 50%));
-}
-.microphone-bubble-active,
-.microphone-bubble-active:hover,
-.microphone-bubble:active {
-  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 40%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 50%), hsl(243, 56%, 30%));
 }
 </style>
