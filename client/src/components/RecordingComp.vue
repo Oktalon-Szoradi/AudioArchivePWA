@@ -35,16 +35,14 @@ let name
 let timeStamp
 
 watch(enabled, value => {
-  if (value) {
-    stopWatchStore.start()
-  } else {
-    stopWatchStore.stop()
+  if (!value) {
     mediaRecorder.stop()
   }
 })
 
 watch(stream, currentStream => {
   if (currentStream) {
+    stopWatchStore.start()
     mediaRecorder = new MediaRecorder(currentStream)
 
     mediaRecorder.ondataavailable = e => {
@@ -52,6 +50,8 @@ watch(stream, currentStream => {
     }
 
     mediaRecorder.onstop = () => {
+      stopWatchStore.stop()
+
       mimeType = mediaRecorder.mimeType || 'audio/ogg; codecs=opus'
 
       timeStamp = new Date()
@@ -76,48 +76,48 @@ watch(stream, currentStream => {
 
 <style scoped>
 .microphone-bubble {
-	display: flex;
-	position: relative;
-	align-items: center;
-	justify-content: center;
-	margin: 1em;
-	border-radius: 50%;
-	box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 50%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-	background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 60%), hsl(243, 56%, 40%));
-	cursor: pointer;
-	width: 10em;
-	height: 10em;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 50%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
+  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 60%), hsl(243, 56%, 40%));
+  cursor: pointer;
+  width: 10em;
+  height: 10em;
 }
 .microphone-bubble::after {
-	position: absolute;
-	top: 0;
-	left: 15%;
-	border-radius: 50%;
-	background-image: radial-gradient(circle at 50% 100%, hsla(0, 0%, 100%, 0%), hsla(0, 0%, 100%, 75%));
-	width: 70%;
-	height: 50%;
-	content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  border-radius: 50%;
+  background-image: radial-gradient(circle at 50% 100%, hsla(0, 0%, 100%, 0%), hsla(0, 0%, 100%, 75%));
+  width: 70%;
+  height: 50%;
+  content: '';
 }
 .microphone-bubble > * {
-	opacity: 75%;
+  opacity: 75%;
 }
 .microphone-bubble:hover {
-	box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 60%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-	background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 70%), hsl(243, 56%, 50%));
+  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 60%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
+  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 70%), hsl(243, 56%, 50%));
 }
 .microphone-bubble-active,
 .microphone-bubble-active:hover,
 .microphone-bubble:active {
-	box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 40%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
-	background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 50%), hsl(243, 56%, 30%));
+  box-shadow: 0 0 8px 0 hsla(0, 0%, 33%), 0 0 32px 0 hsla(243, 56%, 40%), 0 0 16px inset hsla(0, 0%, 100%, 100%);
+  background-image: radial-gradient(circle at 50% 90%, hsl(243, 56%, 50%), hsl(243, 56%, 30%));
 }
 .recording {
-	border-radius: 4px;
-	box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.4), inset 0 0 0 2px hsla(0, 0%, 100%, 0.25);
-	background: linear-gradient(to bottom, #333, black);
-	padding: 8px;
-	color: #7bade2;
-	font-family: StopWatch;
-	font-size: 1.25em;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.4), inset 0 0 0 2px hsla(0, 0%, 100%, 0.25);
+  background: linear-gradient(to bottom, #333, black);
+  padding: 8px;
+  color: #7bade2;
+  font-family: StopWatch;
+  font-size: 1.25em;
 }
 </style>
