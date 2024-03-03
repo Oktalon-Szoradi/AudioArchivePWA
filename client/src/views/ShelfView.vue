@@ -29,11 +29,12 @@
               <q-card-section horizontal class="q-pa-md justify-between">
                 <div>{{ props.row.description }}</div>
                 <div>
-                  {{
+                  <!-- {{
                     `${new Date(props.row.timestamp).toLocaleDateString()} ${new Date(
                       props.row.timestamp
                     ).toLocaleTimeString()}`
-                  }}
+                  }} -->
+                  {{ formatISO9075(props.row.timestamp) }}
                 </div>
               </q-card-section>
               <q-card-section>
