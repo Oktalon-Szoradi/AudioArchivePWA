@@ -9,13 +9,13 @@
       <RecordingCompVue @recording-complete="promptSave" />
     </div>
     <q-dialog v-model="saveDialog" persistent>
-      <q-card style="width: 50%">
+      <q-card>
         <q-card-section>
           <div class="text-h6">Add Recording Details</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none text-center">
-          <AVWaveform :src="audioURL" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
+          <AVWaveform :src="audioURL" :canv-width="300" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
 
           <q-form class="q-gutter-md">
             <q-input
