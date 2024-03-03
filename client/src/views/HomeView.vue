@@ -15,7 +15,7 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none text-center">
-          <audio :src="audioURL" controls />
+          <AVWaveform :src="audioURL" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
 
           <q-form class="q-gutter-md">
             <q-input
@@ -58,6 +58,7 @@
 import { ref } from 'vue'
 import useAudioStore from '@/stores/audioStore.js'
 import RecordingCompVue from '@/components/RecordingComp.vue'
+import { AVWaveform } from 'vue-audio-visual'
 
 const audioStore = useAudioStore()
 

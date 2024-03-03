@@ -59,8 +59,8 @@
           <div class="text-h6">{{ selectedAudio.name }}</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <audio :src="audioURL" controls />
+        <q-card-section class="q-pt-none text-center">
+          <AVWaveform :src="audioURL" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
         </q-card-section>
 
         <q-card-actions align="right">
@@ -115,6 +115,7 @@
 <script setup>
 import { ref } from 'vue'
 import useAudioStore from '@/stores/audioStore.js'
+import { AVWaveform } from 'vue-audio-visual'
 import { formatISO9075 } from 'date-fns'
 
 const audioStore = useAudioStore()
@@ -136,11 +137,11 @@ const selectedAudio = ref(null)
 const audioURL = ref('')
 
 const playAudio = async audio => {
-  audioDialog.value = true
   selectedAudio.value = audio
   const { filename, aid } = audio
   const audioBlob = await audioStore.fetchAudioFile(filename, aid)
   audioURL.value = URL.createObjectURL(audioBlob)
+  audioDialog.value = true
 }
 
 const promptDelete = audio => {
