@@ -15,17 +15,31 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none text-center">
-          <AVWaveform :src="audioURL" :canv-width="300" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
+          <AVWaveform
+            :src="audioURL"
+            :canv-width="300"
+            noplayed-line-color="#7BADE2"
+            played-line-color="#5049CB"
+          />
 
           <q-form class="q-gutter-md">
             <q-input
               filled
               v-model="audioName"
               label="Audio Title"
-              :rules="[val => (val && val.length > 0) || 'Please enter a title']"
+              :rules="[
+                val => (val && val.length > 0) || 'Please enter a title',
+                val =>
+                  (val && val.length <= 32) || 'Title should not exceed 32 characters'
+              ]"
             />
 
-            <q-input filled autogrow v-model="audioDescription" label="Audio Description" />
+            <q-input
+              filled
+              autogrow
+              v-model="audioDescription"
+              label="Audio Description"
+            />
 
             <q-rating v-model="audioRating" size="2em" />
           </q-form>
@@ -95,6 +109,9 @@ const resetFields = () => {
 }
 
 const saveAudio = async () => {
+  if (audioName.value.length > 32 || !audioName.value.length) {
+    return
+  }
   audioStore.addAudio(
     audioName.value,
     audioDescription.value,
