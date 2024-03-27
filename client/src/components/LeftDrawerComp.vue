@@ -56,10 +56,10 @@
 .active {
   background-image: linear-gradient(
     to bottom,
-    hsla(0, 0%, 100%, 25%),
-    hsla(0, 0%, 100%, 10%),
-    hsla(0, 0%, 100%, 10%),
-    hsla(0, 0%, 100%, 25%)
+    hsl(0deg 0% 100% / 25%),
+    hsl(0deg 0% 100% / 10%),
+    hsl(0deg 0% 100% / 10%),
+    hsl(0deg 0% 100% / 25%)
   );
   font-weight: bold;
 }

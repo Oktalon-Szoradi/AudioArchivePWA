@@ -303,6 +303,7 @@ const updatedColumns = computed(() => {
 * {
   color: #3d1a78;
 }
+
 .audio-table {
   width: 90vw;
 }

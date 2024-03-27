@@ -30,73 +30,83 @@ const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value)
 
 <style>
 body {
-	background: hsl(211, 64%, 78%);
-	background-image: linear-gradient(135deg, hsl(211, 64%, 78%), hsl(211, 64%, 68%));
+	background: hsl(211deg 64% 78%);
+	background-image: linear-gradient(135deg, hsl(211deg 64% 78%), hsl(211deg 64% 68%));
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
 .q-drawer {
 	background: transparent !important;
 	background-image: linear-gradient(
     to bottom,
-    hsla(243, 56%, 54%, 50%),
-    hsla(243, 56%, 64%, 50%),
-    hsla(243, 56%, 54%, 50%)
+    hsl(243deg 56% 54% / 50%),
+    hsl(243deg 56% 64% / 50%),
+    hsl(243deg 56% 54% / 50%)
   ) !important;
 	backdrop-filter: blur(8px);
 }
+
 .text-shadow {
-	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+	text-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
 }
+
 .overflow-ellipse {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
 .q-item.q-router-link--active {
 	color: white;
 }
+
 .title {
   position: absolute;
 	top: -0.425em;
 	left: -0.125em;
 	opacity: 0.05;
 	z-index: -1;
+  font-family: OxygenLight;
 	font-size: 16em;
-  font-family: 'OxygenLight';
 	user-select: none;
 }
+
 .about-box {
-  font-size: 1.25em;
   border-radius: 4px;
-  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 1), 0 0 0 2px hsla(0, 0%, 0%, 0.5),
+  box-shadow: 0 0 0 1px hsl(0deg 0% 100% / 100%), 0 0 0 2px hsl(0deg 0% 0% / 50%),
     0 0 8px black;
   background-image: radial-gradient(
       ellipse 100% 33% at bottom,
-      hsla(0, 0%, 0%, 0.15),
+      hsl(0deg 0% 0% / 15%),
       transparent
     ),
-    radial-gradient(ellipse at bottom left, transparent 75%, hsla(0, 0%, 100%, 0.75)),
-    radial-gradient(ellipse at bottom right, transparent 75%, hsla(0, 0%, 100%, 0.75)),
+    radial-gradient(ellipse at bottom left, transparent 75%, hsl(0deg 0% 100% / 75%)),
+    radial-gradient(ellipse at bottom right, transparent 75%, hsl(0deg 0% 100% / 75%)),
     linear-gradient(
       to bottom,
-      hsla(0, 0%, 100%, 0.55),
-      hsla(0, 0%, 100%, 0.6) 49%,
-      hsla(0, 0%, 100%, 0.5) 51%
+      hsl(0deg 0% 100% / 55%),
+      hsl(0deg 0% 100% / 60%) 49%,
+      hsl(0deg 0% 100% / 50%) 51%
     );
   width: 90vw;
+  font-size: 1.25em;
   backdrop-filter: blur(4px);
 }
+
 /* NavSideBar Items Bottom-Aligned (For Mobile View) */
-@media (max-width: 599px) {
+@media (width <= 599px) {
+  /* stylelint-disable-next-line selector-class-pattern */
   .q-scrollarea__content {
-    justify-content: flex-end;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
   }
 }
-@media (max-width: 800px) {
+
+@media (width <= 800px) {
   .title {
     font-size: 8em;
   }

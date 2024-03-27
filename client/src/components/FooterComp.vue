@@ -1,5 +1,5 @@
 <template>
-  <q-footer elevated class="navFooter text-white">
+  <q-footer elevated class="nav-footer text-white">
     <q-toolbar>
       <q-btn dense flat round icon="r_menu" @click="$emit('toggleLeftDrawer')" />
 
@@ -22,14 +22,14 @@ defineEmits(['toggleLeftDrawer'])
 </script>
 
 <style scoped>
-.navFooter {
+.nav-footer {
   background-color: transparent;
   background-image: linear-gradient(
       to bottom,
-      hsla(0, 0%, 100%, 25%),
-      hsla(0, 0%, 100%, 0%) 25%
+      hsl(0deg 0% 100% / 25%),
+      hsl(0deg 0% 100% / 0%) 25%
     ),
-    linear-gradient(to right, hsla(243, 56%, 54%, 50%), hsla(243, 56%, 64%, 50%));
+    linear-gradient(to right, hsl(243deg 56% 54% / 50%), hsl(243deg 56% 64% / 50%));
   backdrop-filter: blur(8px);
 }
 </style>

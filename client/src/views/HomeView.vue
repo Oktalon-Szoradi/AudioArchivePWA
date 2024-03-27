@@ -122,6 +122,7 @@ const ultimatelyCancel = () => {
 * {
   color: #3d1a78;
 }
+
 img {
   width: 50vw;
   max-width: 256px;

@@ -1,5 +1,5 @@
 <template>
-  <q-header class="navHeader text-white" elevated height-hint="98">
+  <q-header class="nav-header text-white" elevated height-hint="98">
     <q-toolbar>
       <!-- <q-btn dense flat round icon="r_menu" @click="$emit('toggleLeftDrawer')" /> -->
 
@@ -29,14 +29,14 @@ defineEmits(['toggleLeftDrawer'])
 </script>
 
 <style scoped>
-.navHeader {
+.nav-header {
   background-color: transparent;
   background-image: linear-gradient(
       to bottom,
       transparent 80%,
-      hsla(0, 0%, 100%, 17.5%)
+      hsl(0deg 0% 100% / 17.5%)
     ),
-    linear-gradient(to right, hsla(243, 56%, 54%, 50%), hsla(243, 56%, 64%, 50%));
+    linear-gradient(to right, hsl(243deg 56% 54% / 50%), hsl(243deg 56% 64% / 50%));
   backdrop-filter: blur(8px);
 }
 </style>
