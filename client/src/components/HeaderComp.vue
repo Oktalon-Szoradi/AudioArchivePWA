@@ -31,11 +31,7 @@ defineEmits(['toggleLeftDrawer'])
 <style scoped>
 .nav-header {
   background-color: transparent;
-  background-image: linear-gradient(
-      to bottom,
-      transparent 80%,
-      hsl(0deg 0% 100% / 17.5%)
-    ),
+  background-image: linear-gradient(to bottom, transparent 80%, hsl(0deg 0% 100% / 17.5%)),
     linear-gradient(to right, hsl(243deg 56% 54% / 50%), hsl(243deg 56% 64% / 50%));
   backdrop-filter: blur(8px);
 }

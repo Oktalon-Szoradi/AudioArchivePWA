@@ -6,6 +6,6 @@
 
 <script setup>
 defineProps({
-  title: String,
-});
+  title: String
+})
 </script>

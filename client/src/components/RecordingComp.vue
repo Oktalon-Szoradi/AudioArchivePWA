@@ -82,8 +82,13 @@ watch(stream, currentStream => {
   justify-content: center;
   margin: 1em;
   border-radius: 50%;
-  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 50%), 0 0 16px inset hsl(0deg 0% 100% / 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243deg 56% 60%), hsl(243deg 56% 40%));
+  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 50%),
+    0 0 16px inset hsl(0deg 0% 100% / 100%);
+  background-image: radial-gradient(
+    circle at 50% 90%,
+    hsl(243deg 56% 60%),
+    hsl(243deg 56% 40%)
+  );
   cursor: pointer;
   width: 10em;
   height: 10em;
@@ -94,7 +99,11 @@ watch(stream, currentStream => {
   top: 0;
   left: 15%;
   border-radius: 50%;
-  background-image: radial-gradient(circle at 50% 100%, hsl(0deg 0% 100% / 0%), hsl(0deg 0% 100% / 75%));
+  background-image: radial-gradient(
+    circle at 50% 100%,
+    hsl(0deg 0% 100% / 0%),
+    hsl(0deg 0% 100% / 75%)
+  );
   width: 70%;
   height: 50%;
   content: '';
@@ -105,20 +114,31 @@ watch(stream, currentStream => {
 }
 
 .microphone-bubble:hover {
-  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 60%), 0 0 16px inset hsl(0deg 0% 100% / 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243deg 56% 70%), hsl(243deg 56% 50%));
+  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 60%),
+    0 0 16px inset hsl(0deg 0% 100% / 100%);
+  background-image: radial-gradient(
+    circle at 50% 90%,
+    hsl(243deg 56% 70%),
+    hsl(243deg 56% 50%)
+  );
 }
 
 .microphone-bubble-active,
 .microphone-bubble-active:hover,
 .microphone-bubble:active {
-  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 40%), 0 0 16px inset hsl(0deg 0% 100% / 100%);
-  background-image: radial-gradient(circle at 50% 90%, hsl(243deg 56% 50%), hsl(243deg 56% 30%));
+  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 40%),
+    0 0 16px inset hsl(0deg 0% 100% / 100%);
+  background-image: radial-gradient(
+    circle at 50% 90%,
+    hsl(243deg 56% 50%),
+    hsl(243deg 56% 30%)
+  );
 }
 
 .recording {
   border-radius: 4px;
-  box-shadow: inset 0 0 0 1px hsl(0deg 0% 0% / 40%), inset 0 0 0 2px hsl(0deg 0% 100% / 25%);
+  box-shadow: inset 0 0 0 1px hsl(0deg 0% 0% / 40%),
+    inset 0 0 0 2px hsl(0deg 0% 100% / 25%);
   background: linear-gradient(to bottom, #333, black);
   padding: 8px;
   color: #7bade2;
