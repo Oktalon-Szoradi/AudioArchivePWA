@@ -4,7 +4,7 @@ import axios from 'axios'
 import { formatISO9075 } from 'date-fns'
 
 const useAudioStore = defineStore('AudioStore', () => {
-  const pwaTitle = ref('AudioArchive (prototype)')
+  const pwaTitle = ref('AudioArchive v0.2.2')
   const audios = ref([])
 
   const fetchAudios = async () => {
