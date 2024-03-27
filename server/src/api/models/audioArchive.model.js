@@ -1,7 +1,7 @@
 import query from '../../db/index.js'
 
 export const getAllAudioMetadataDb = async () => {
-  const result = await query('SELECT * FROM audios;')
+  const result = await query('SELECT * FROM audios ORDER BY timestamp DESC;')
   return result.rows
 }
 
