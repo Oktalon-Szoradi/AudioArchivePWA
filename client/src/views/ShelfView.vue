@@ -5,12 +5,12 @@
       <q-table
         class="audio-table"
         :rows="audioStore.audios"
-        :columns="columns"
+        :columns="updatedColumns"
         row-key="id"
         virtual-scroll
         v-model:pagination="pagination"
         :rows-per-page-options="[0]"
-        :grid="$q.screen.lt.md"
+        :grid="$q.screen.lt.sm"
       >
         <template v-slot:item="props">
           <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
@@ -21,7 +21,9 @@
                 </q-card-section>
                 <q-card-section>
                   <span class="text-h6">
-                    {{ `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}` }}
+                    {{
+                      `${`★`.repeat(props.row.rating)}${`☆`.repeat(5 - props.row.rating)}`
+                    }}
                   </span>
                 </q-card-section>
               </q-card-section>
@@ -38,18 +40,60 @@
                 </div>
               </q-card-section>
               <q-card-section>
-                <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
-                <q-btn color="primary" dense flat round icon="edit" @click="editAudio(props.row)" />
-                <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="play_arrow"
+                  @click="playAudio(props.row)"
+                />
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="edit"
+                  @click="editAudio(props.row)"
+                />
+                <q-btn
+                  color="primary"
+                  dense
+                  flat
+                  round
+                  icon="delete"
+                  @click="promptDelete(props.row)"
+                />
               </q-card-section>
             </q-card>
           </div>
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
-            <q-btn color="primary" dense flat round icon="play_arrow" @click="playAudio(props.row)" />
-            <q-btn color="primary" dense flat round icon="edit" @click="editAudio(props.row)" />
-            <q-btn color="primary" dense flat round icon="delete" @click="promptDelete(props.row)" />
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="play_arrow"
+              @click="playAudio(props.row)"
+            />
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="edit"
+              @click="editAudio(props.row)"
+            />
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="delete"
+              @click="promptDelete(props.row)"
+            />
           </q-td>
         </template>
       </q-table>
@@ -60,8 +104,22 @@
           <div class="text-h6">{{ selectedAudio.name }}</div>
         </q-card-section>
 
+        <q-card-section>
+          <i v-if="selectedAudio.description.trim() === ''" class="opacity-50">
+            No description
+          </i>
+          <p v-else>
+            {{ selectedAudio.description }}
+          </p>
+        </q-card-section>
+
         <q-card-section class="q-pt-none text-center">
-          <AVWaveform :src="audioURL" noplayed-line-color="#7BADE2" played-line-color="#5049CB" />
+          <AVWaveform
+            :canv-width="300"
+            :src="audioURL"
+            noplayed-line-color="#7BADE2"
+            played-line-color="#5049CB"
+          />
         </q-card-section>
 
         <q-card-actions align="right">
@@ -72,13 +130,21 @@
     <q-dialog v-model="deleteDialog" persistent>
       <q-card>
         <q-card-section>
-          <div class="text-h6">Are you sure you want to delete {{ selectedAudio.name }}?</div>
+          <div class="text-h6">
+            Are you sure you want to delete {{ selectedAudio.name }}?
+          </div>
         </q-card-section>
 
         <q-card-section class="q-pt-none"> It cannot be brought back! </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn glossy label="Yes" color="primary" @click="audioStore.deleteAudio(selectedAudio.aid)" v-close-popup />
+          <q-btn
+            glossy
+            label="Yes"
+            color="primary"
+            @click="audioStore.deleteAudio(selectedAudio.aid)"
+            v-close-popup
+          />
           <q-btn flat label="No" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -98,14 +164,25 @@
               :rules="[val => (val && val.length > 0) || 'Please enter a title']"
             />
 
-            <q-input filled autogrow v-model="newAudioDescription" label="New Audio Description" />
+            <q-input
+              filled
+              autogrow
+              v-model="newAudioDescription"
+              label="New Audio Description"
+            />
 
             <q-rating v-model="newAudioRating" size="2em" />
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn glossy label="Update" color="primary" @click="updateAudio(selectedAudio)" v-close-popup />
+          <q-btn
+            glossy
+            label="Update"
+            color="primary"
+            @click="updateAudio(selectedAudio)"
+            v-close-popup
+          />
           <q-btn flat label="Cancel" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -114,10 +191,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useQuasar } from 'quasar'
 import useAudioStore from '@/stores/audioStore.js'
 import { AVWaveform } from 'vue-audio-visual'
 import { formatISO9075 } from 'date-fns'
+
+const $q = useQuasar()
 
 const audioStore = useAudioStore()
 audioStore.fetchAudios()
@@ -172,14 +252,18 @@ const columns = [
     label: 'Name',
     field: 'name',
     align: 'left',
-    sortable: true
+    sortable: true,
+    style:
+      'max-width: 128px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'
   },
   {
     name: 'description',
     label: 'Description',
     field: 'description',
     align: 'left',
-    sortable: true
+    sortable: true,
+    style:
+      'max-width: 128px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'
   },
   {
     name: 'rating',
@@ -206,6 +290,13 @@ const columns = [
     sortable: false
   }
 ]
+
+const updatedColumns = computed(() => {
+  if ($q.screen.lt.md) {
+    return columns.filter(column => column.name !== 'description')
+  }
+  return columns
+})
 </script>
 
 <style scoped>
