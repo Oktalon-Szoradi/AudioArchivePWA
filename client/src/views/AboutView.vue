@@ -18,6 +18,17 @@
         </a>
       </p>
     </div>
+    <div class="q-mt-xl q-pa-md about-box text-center">
+      <p>
+        <b>RetroArch Menu Ribbon Like PS3</b>
+        <p>
+          by Haxtir on CodePen<br />
+          <a href="https://codepen.io/haxtir/pen/YMJLLZ" target="_blank">
+            https://codepen.io/haxtir/pen/YMJLLZ (opens in new tab)
+          </a>
+        </p>
+      </p>
+    </div>
   </div>
 </template>
 

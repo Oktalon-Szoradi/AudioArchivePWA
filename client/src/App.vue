@@ -1,4 +1,6 @@
 <template>
+  <BackgroundComp />
+
   <q-layout view="hHh lpR fFf">
     <HeaderComp @toggleLeftDrawer="toggleLeftDrawer" v-if="!$q.screen.lt.sm" />
 
@@ -15,6 +17,7 @@
 </template>
 
 <script setup>
+import BackgroundComp from './components/BackgroundComp.vue'
 import HeaderComp from '@/components/HeaderComp.vue'
 import LeftDrawerComp from '@/components/LeftDrawerComp.vue'
 import FooterComp from '@/components/FooterComp.vue'
