@@ -15,21 +15,21 @@
     "@quasar/extras": "^1.16.9",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vueuse/core": "^10.9.0",
-    "axios": "^1.6.7",
-    "date-fns": "^3.3.1",
+    "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
     "pinia": "^2.1.7",
-    "quasar": "^2.14.5",
-    "vite": "^5.1.4",
-    "vue": "^3.4.19",
+    "quasar": "^2.15.1",
+    "vite": "^5.2.6",
+    "vue": "^3.4.21",
     "vue-audio-visual": "^3.0.7",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.6.0",
-    "autoprefixer": "^10.4.17",
+    "autoprefixer": "^10.4.19",
     "prettier": "^3.2.5",
-    "sass": "^1.71.1",
+    "sass": "^1.72.0",
     "standard": "^17.1.0",
-    "vite-plugin-pwa": "^0.19.0"
+    "vite-plugin-pwa": "^0.19.7"
   }
 }
