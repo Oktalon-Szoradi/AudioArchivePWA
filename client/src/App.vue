@@ -30,26 +30,36 @@ const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value)
 
 <style>
 body {
-	background: hsl(211deg 64% 78%);
-	background-image: linear-gradient(135deg, hsl(211deg 64% 78%), hsl(211deg 64% 68%));
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+  background: hsl(211deg 64% 78%);
+  background-image: linear-gradient(135deg, hsl(211deg 64% 78%), hsl(211deg 64% 68%));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.q-card {
+  backdrop-filter: blur(4px);
+  background-color: hsla(211deg 64% 95% / 75%);
 }
 
 .q-drawer {
-	background: transparent !important;
-	background-image: linear-gradient(
+  background: transparent !important;
+  background-image: linear-gradient(
     to bottom,
     hsl(243deg 56% 54% / 50%),
     hsl(243deg 56% 64% / 50%),
     hsl(243deg 56% 54% / 50%)
   ) !important;
-	backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.q-item.q-router-link--active {
+  color: white;
 }
 
 .text-shadow {
-	text-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  text-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
 }
 
 .overflow-ellipse {
@@ -58,20 +68,15 @@ body {
   white-space: nowrap;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
-.q-item.q-router-link--active {
-	color: white;
-}
-
 .title {
   position: absolute;
-	top: -0.425em;
-	left: -0.125em;
-	opacity: 0.05;
-	z-index: -1;
+  top: -0.425em;
+  left: -0.125em;
+  opacity: 0.05;
+  z-index: -1;
   font-family: OxygenLight;
-	font-size: 16em;
-	user-select: none;
+  font-size: 16em;
+  user-select: none;
 }
 
 .about-box {

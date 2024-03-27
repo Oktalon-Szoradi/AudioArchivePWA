@@ -312,12 +312,8 @@ const updatedColumns = computed(() => {
   color: #3d1a78;
 }
 
-.audio-table,
-.q-card {
-  backdrop-filter: blur(4px);
-}
-
 .audio-table {
+  backdrop-filter: blur(4px);
   width: 90vw;
 }
 
@@ -330,8 +326,4 @@ const updatedColumns = computed(() => {
   backdrop-filter: none;
 }
 /* stylelint-enable selector-class-pattern */
-
-.q-card {
-  background-color: hsla(211deg 64% 95% / 75%);
-}
 </style>
