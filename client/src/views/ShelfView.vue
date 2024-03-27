@@ -16,7 +16,7 @@
           <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
             <q-card flat bordered>
               <q-card-section horizontal class="justify-between">
-                <q-card-section>
+                <q-card-section class="text-left overflow-ellipse">
                   <strong class="text-h6">{{ props.row.name }}</strong>
                 </q-card-section>
                 <q-card-section>

@@ -46,6 +46,11 @@ body {
 .text-shadow {
 	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
+.overflow-ellipse {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .q-item.q-router-link--active {
 	color: white;
 }
