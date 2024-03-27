@@ -30,6 +30,8 @@
     "prettier": "^3.2.5",
     "sass": "^1.72.0",
     "standard": "^17.1.0",
+    "stylelint-config-concentric-order": "^5.2.0",
+    "stylelint-config-standard-vue": "^1.0.0",
     "vite-plugin-pwa": "^0.19.7"
   }
 }
