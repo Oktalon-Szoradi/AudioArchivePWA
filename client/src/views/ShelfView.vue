@@ -12,6 +12,34 @@
         :rows-per-page-options="[0]"
         :grid="$q.screen.lt.sm"
       >
+        <template v-slot:body-cell-actions="props">
+          <q-td :props="props">
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="play_arrow"
+              @click="playAudio(props.row)"
+            />
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="edit"
+              @click="editAudio(props.row)"
+            />
+            <q-btn
+              color="primary"
+              dense
+              flat
+              round
+              icon="delete"
+              @click="promptDelete(props.row)"
+            />
+          </q-td>
+        </template>
         <template v-slot:item="props">
           <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
             <q-card flat bordered>
@@ -67,34 +95,6 @@
               </q-card-section>
             </q-card>
           </div>
-        </template>
-        <template v-slot:body-cell-actions="props">
-          <q-td :props="props">
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="play_arrow"
-              @click="playAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="edit"
-              @click="editAudio(props.row)"
-            />
-            <q-btn
-              color="primary"
-              dense
-              flat
-              round
-              icon="delete"
-              @click="promptDelete(props.row)"
-            />
-          </q-td>
         </template>
       </q-table>
     </div>
@@ -161,7 +161,11 @@
               filled
               v-model="newAudioName"
               label="New Audio Title"
-              :rules="[val => (val && val.length > 0) || 'Please enter a title']"
+              :rules="[
+                val => (val && val.length > 0) || 'Please enter a title',
+                val =>
+                  (val && val.length <= 32) || 'Title should not exceed 32 characters'
+              ]"
             />
 
             <q-input
@@ -181,7 +185,6 @@
             label="Update"
             color="primary"
             @click="updateAudio(selectedAudio)"
-            v-close-popup
           />
           <q-btn flat label="Cancel" color="primary" v-close-popup />
         </q-card-actions>
@@ -239,6 +242,9 @@ const editAudio = audio => {
 }
 
 const updateAudio = () => {
+  if (newAudioName.value.length > 32 || !newAudioName.value.length) {
+    return
+  }
   selectedAudio.value.name = newAudioName.value
   selectedAudio.value.description = newAudioDescription.value
   selectedAudio.value.rating = newAudioRating.value
@@ -255,6 +261,7 @@ const columns = [
     sortable: true,
     style:
       'max-width: 128px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'
+    // classes: 'q-table--col-auto-width'
   },
   {
     name: 'description',
@@ -263,7 +270,8 @@ const columns = [
     align: 'left',
     sortable: true,
     style:
-      'max-width: 128px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'
+      'max-width: 192px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'
+    // classes: 'q-table--col-auto-width'
   },
   {
     name: 'rating',
@@ -304,7 +312,26 @@ const updatedColumns = computed(() => {
   color: #3d1a78;
 }
 
+.audio-table,
+.q-card {
+  backdrop-filter: blur(4px);
+}
+
 .audio-table {
   width: 90vw;
+}
+
+/* stylelint-disable selector-class-pattern */
+.audio-table:not(.q-table--grid) {
+  background-color: hsla(211deg 64% 95% / 50%);
+}
+
+.q-table--grid {
+  backdrop-filter: none;
+}
+/* stylelint-enable selector-class-pattern */
+
+.q-card {
+  background-color: hsla(211deg 64% 95% / 75%);
 }
 </style>
