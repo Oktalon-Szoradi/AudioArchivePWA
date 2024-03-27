@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">Home</div>
-    <div class="q-mt-md text-center">
+    <div class="text-center">
       <img src="/AudioArchive_Logo.svg" />
       <h4>Welcome!</h4>
       <p>To begin recording, just press the microphone bubble below.</p>
