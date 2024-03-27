@@ -57,20 +57,13 @@ body {
 .q-item.q-router-link--active {
 	color: white;
 }
-@media (max-width: 599px) {
-  .q-scrollarea__content {
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
-  }
-}
 .title {
-	position: absolute;
+  position: absolute;
 	top: -0.425em;
 	left: -0.125em;
-	opacity: 0.1;
+	opacity: 0.05;
 	z-index: -1;
-	font-size: 8em;
+	font-size: 16em;
   font-family: 'OxygenLight';
 	user-select: none;
 }
@@ -94,5 +87,18 @@ body {
     );
   width: 90vw;
   backdrop-filter: blur(4px);
+}
+/* NavSideBar Items Bottom-Aligned (For Mobile View) */
+@media (max-width: 599px) {
+  .q-scrollarea__content {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 800px) {
+  .title {
+    font-size: 8em;
+  }
 }
 </style>
