@@ -78,7 +78,7 @@
         <q-card-section class="q-pt-none"> It cannot be brought back! </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn label="Yes" color="primary" @click="audioStore.deleteAudio(selectedAudio.aid)" v-close-popup />
+          <q-btn glossy label="Yes" color="primary" @click="audioStore.deleteAudio(selectedAudio.aid)" v-close-popup />
           <q-btn flat label="No" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -100,12 +100,12 @@
 
             <q-input filled autogrow v-model="newAudioDescription" label="New Audio Description" />
 
-            <q-rating v-model="newAudioRating" />
+            <q-rating v-model="newAudioRating" size="2em" />
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn label="Update" color="primary" @click="updateAudio(selectedAudio)" v-close-popup />
+          <q-btn glossy label="Update" color="primary" @click="updateAudio(selectedAudio)" v-close-popup />
           <q-btn flat label="Cancel" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -187,7 +187,8 @@ const columns = [
     field: 'rating',
     format: val => `${`★`.repeat(val)}${`☆`.repeat(5 - val)}`,
     align: 'left',
-    sortable: true
+    sortable: true,
+    style: 'font-size: 1.5em;'
   },
   {
     name: 'timestamp',

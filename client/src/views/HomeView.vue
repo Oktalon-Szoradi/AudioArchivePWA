@@ -27,12 +27,12 @@
 
             <q-input filled autogrow v-model="audioDescription" label="Audio Description" />
 
-            <q-rating v-model="audioRating" />
+            <q-rating v-model="audioRating" size="2em" />
           </q-form>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn label="Save" color="primary" @click="saveAudio()" />
+          <q-btn glossy label="Save" color="primary" @click="saveAudio()" />
           <q-btn flat label="Cancel" color="primary" @click="cancelAudio()" />
         </q-card-actions>
       </q-card>
@@ -46,7 +46,7 @@
         <q-card-section class="q-pt-none"> Your recording will be lost. </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn label="Yes" color="primary" @click="ultimatelyCancel()" />
+          <q-btn glossy label="Yes" color="primary" @click="ultimatelyCancel()" />
           <q-btn flat label="No" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
