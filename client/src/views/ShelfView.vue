@@ -57,13 +57,13 @@
               </q-card-section>
               <q-separator />
               <q-card-section horizontal class="q-pa-md justify-between">
-                <div>{{ props.row.description }}</div>
-                <div>
-                  <!-- {{
-                    `${new Date(props.row.timestamp).toLocaleDateString()} ${new Date(
-                      props.row.timestamp
-                    ).toLocaleTimeString()}`
-                  }} -->
+                <div class="text-left">
+                  <i v-if="props.row.description.trim() === ''" style="opacity: 0.5">
+                    No description
+                  </i>
+                  {{ props.row.description }}
+                </div>
+                <div class="text-right" style="min-width: 150px">
                   {{ formatISO9075(props.row.timestamp) }}
                 </div>
               </q-card-section>
@@ -105,7 +105,7 @@
         </q-card-section>
 
         <q-card-section>
-          <i v-if="selectedAudio.description.trim() === ''" class="opacity-50">
+          <i v-if="selectedAudio.description.trim() === ''" style="opacity: 0.5">
             No description
           </i>
           <p v-else>

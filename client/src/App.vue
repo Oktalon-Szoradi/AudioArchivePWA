@@ -35,6 +35,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-x: hidden;
 }
 
 .q-card {
@@ -71,7 +72,7 @@ body {
 .title {
   position: absolute;
   top: -0.425em;
-  left: -0.125em;
+  left: -0.075em;
   opacity: 0.05;
   z-index: -1;
   font-family: OxygenLight;

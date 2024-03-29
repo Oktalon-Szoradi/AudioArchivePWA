@@ -45,6 +45,7 @@
         <a
           href="https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg"
           target="_blank"
+          style="word-break: break-all;"
         >
           https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg
         </a>
