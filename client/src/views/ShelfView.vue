@@ -2,6 +2,11 @@
   <div>
     <div class="title">shelf</div>
     <div class="q-mt-xl text-center">
+      <q-banner v-if="!audioStore.isOnline" rounded class="q-mb-sm offline-banner">
+        <b class="text-white" style="text-shadow: 0 2px 2px black"
+          >You are offline!&nbsp;&nbsp;&colon;&lpar;</b
+        >
+      </q-banner>
       <q-table
         class="audio-table"
         :rows="audioStore.audios"
@@ -315,6 +320,23 @@ const updatedColumns = computed(() => {
 .audio-table {
   backdrop-filter: blur(4px);
   width: 90vw;
+}
+
+.offline-banner {
+  backdrop-filter: blur(4px);
+  background: linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%) 50%,
+      rgb(0 0 0 / 12%) 51%,
+      rgb(0 0 0 / 4%)
+    ),
+    linear-gradient(
+      to bottom,
+      hsla(0deg 100% 60% / 67%),
+      hsla(0deg 100% 40% / 67%),
+      hsla(0deg 100% 50% / 67%)
+    );
 }
 
 /* stylelint-disable selector-class-pattern */
