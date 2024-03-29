@@ -57,7 +57,7 @@
               to right,
               hsla(0deg 100% 50% / 25%),
               hsla(0deg 100% 50% / 5%)
-            );
+            )
           "
         >
           <q-item-section class="text-shadow">Update available! Tap here!</q-item-section>
