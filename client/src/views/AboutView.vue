@@ -13,12 +13,35 @@
         2023/2024
       </q-card-section>
       <q-card-section>
-        AudioArchive is a work-in-progress Progressive Web App (PWA) for
-        recording, uploading, and converting audio.<br />
+        AudioArchive is a work-in-progress Progressive Web App (PWA) for recording,
+        uploading, and converting audio.<br />
       </q-card-section>
       <q-card-section>
         <a href="https://github.com/Oktalon-Szoradi/AudioArchivePWA" target="_blank">
           GitHub Repository
+        </a>
+      </q-card-section>
+    </q-card>
+    <q-card class="text-center q-ma-md">
+      <q-card-section>
+        <b>Fonts</b>
+      </q-card-section>
+      <q-separator />
+      <q-card-section>
+        Main font: <b>Oxygen</b><br />
+        Copyright &copy; 2012, vernon adams (vern@newtypography.co.uk), with Reserved Font
+        Names 'Oxygen'<br />
+        This Font Software is licensed under the SIL Open Font License, Version 1.1.<br />
+        <a href="/Oxygen_OFL.txt" target="_blank" style="word-break: break-all">
+          Read the license
+        </a>
+      </q-card-section>
+      <q-card-section>
+        Timer/Stopwatch font: <b>E1234</b><br />
+        Copyright &copy; 2020 GGBot, with Reserved Font Name "E1234".<br />
+        This Font Software is licensed under the SIL Open Font License, Version 1.1.<br />
+        <a href="/E1234_License.txt" target="_blank" style="word-break: break-all">
+          Read the license
         </a>
       </q-card-section>
     </q-card>
@@ -45,7 +68,7 @@
         <a
           href="https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg"
           target="_blank"
-          style="word-break: break-all;"
+          style="word-break: break-all"
         >
           https://en.wikipedia.org/w/skins/Vector/resources/skins.vector.styles/images/link-external-small-ltr-progressive.svg
         </a>
