@@ -12,7 +12,10 @@
         HTL Wien West<br />
         2023/2024
       </q-card-section>
-      <q-card-section> This is still a work-in-progress. </q-card-section>
+      <q-card-section>
+        AudioArchive is a work-in-progress Progressive Web App (PWA) for
+        recording, uploading, and converting audio.<br />
+      </q-card-section>
       <q-card-section>
         <a href="https://github.com/Oktalon-Szoradi/AudioArchivePWA" target="_blank">
           GitHub Repository
