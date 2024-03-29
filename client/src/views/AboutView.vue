@@ -47,6 +47,18 @@
     </q-card>
     <q-card class="text-center q-ma-md">
       <q-card-section>
+        <b>Audio visualizations</b>
+      </q-card-section>
+      <q-separator />
+      <q-card-section>
+        by Stas Kobzar<br />
+        <a href="https://github.com/staskobzar/vue-audio-visual" target="_blank">
+          https://github.com/staskobzar/vue-audio-visual
+        </a>
+      </q-card-section>
+    </q-card>
+    <q-card class="text-center q-ma-md">
+      <q-card-section>
         <b>RetroArch Menu Ribbon Like PS3</b>
       </q-card-section>
       <q-separator />
