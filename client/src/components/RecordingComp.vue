@@ -2,10 +2,14 @@
   <div>
     <div class="q-mt-xl row justify-center">
       <!-- :class="mediaRecorderState !== 'inactive' ? 'microphone-bubble-active' : ''" -->
-      <div class="microphone-bubble" @click="enabled = !enabled">
+      <div
+        :class="`microphone-bubble ${offline ? 'offline' : ''}`"
+        @click="!offline ? (enabled = !enabled) : null"
+      >
         <q-icon :name="enabled ? 'stop' : 'mic'" color="white" size="5em" />
       </div>
     </div>
+    <span v-if="offline">Audio recording is disabled while you're offline.</span>
     <div v-show="enabled" class="recording">
       <AVMedia :media="stream" type="wform" line-color="#7BADE2" />
       <p>{{ stopWatchStore.time }}</p>
@@ -23,6 +27,10 @@ import useStopWatchStore from '@/stores/stopWatchStore.js'
 const emit = defineEmits(['recordingComplete'])
 const { stream, enabled } = useUserMedia({ constraints: { audio: true } })
 const stopWatchStore = useStopWatchStore()
+
+const props = defineProps({
+  offline: { type: Boolean, default: false }
+})
 
 let mediaRecorder
 let chunks = []
@@ -74,7 +82,7 @@ watch(stream, currentStream => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .microphone-bubble {
   display: flex;
   position: relative;
@@ -113,26 +121,33 @@ watch(stream, currentStream => {
   opacity: 0.75;
 }
 
-.microphone-bubble:hover {
-  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 60%),
-    0 0 16px inset hsl(0deg 0% 100% / 100%);
-  background-image: radial-gradient(
-    circle at 50% 90%,
-    hsl(243deg 56% 70%),
-    hsl(243deg 56% 50%)
-  );
+.microphone-bubble:not(.offline) {
+  &:hover {
+    box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 60%),
+      0 0 16px inset hsl(0deg 0% 100% / 100%);
+    background-image: radial-gradient(
+      circle at 50% 90%,
+      hsl(243deg 56% 70%),
+      hsl(243deg 56% 50%)
+    );
+  }
+
+  .microphone-bubble-active,
+  .microphone-bubble-active:hover,
+  &:active {
+    box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 40%),
+      0 0 16px inset hsl(0deg 0% 100% / 100%);
+    background-image: radial-gradient(
+      circle at 50% 90%,
+      hsl(243deg 56% 50%),
+      hsl(243deg 56% 30%)
+    );
+  }
 }
 
-.microphone-bubble-active,
-.microphone-bubble-active:hover,
-.microphone-bubble:active {
-  box-shadow: 0 0 8px 0 hsl(0deg 0% 33%), 0 0 32px 0 hsl(243deg 56% 40%),
-    0 0 16px inset hsl(0deg 0% 100% / 100%);
-  background-image: radial-gradient(
-    circle at 50% 90%,
-    hsl(243deg 56% 50%),
-    hsl(243deg 56% 30%)
-  );
+.offline {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .recording {

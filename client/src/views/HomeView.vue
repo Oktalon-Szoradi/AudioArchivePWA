@@ -9,7 +9,7 @@
         Afterwards, you may give your recording a title, description, and a rating.
       </p>
       <p><b>Notice:</b> Currently, all saved audio is public!</p>
-      <RecordingCompVue @recording-complete="promptSave" />
+      <RecordingCompVue @recording-complete="promptSave" :offline="!audioStore.isOnline" />
     </div>
     <q-dialog v-model="saveDialog" persistent>
       <q-card>

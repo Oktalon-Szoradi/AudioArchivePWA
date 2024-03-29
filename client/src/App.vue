@@ -36,12 +36,15 @@ import FooterComp from '@/components/FooterComp.vue'
 import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import { useQuasar } from 'quasar'
+import { onlineTest } from '@/utils/onlineTest.js'
+import useAudioStore from '@/stores/audioStore.js'
 
 const $q = useQuasar()
 
 const leftDrawerOpen = ref(false)
 const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value)
 
+const audioStore = useAudioStore()
 const update = ref(false)
 
 const updateAndReload = async () => {
@@ -54,6 +57,10 @@ onMounted(async () => {
   window.addEventListener('resize', () => {
     if (!$q.screen.lt.sm) leftDrawerOpen.value = false
   })
+
+  window.addEventListener('online', () => (audioStore.isOnline = true))
+  window.addEventListener('offline', () => (audioStore.isOnline = false))
+  audioStore.isOnline = await onlineTest()
 
   const registration = await navigator.serviceWorker.getRegistration()
   if (!registration) {

@@ -6,6 +6,7 @@ import { formatISO9075 } from 'date-fns'
 const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive v0.2.2')
   const audios = ref([])
+  const isOnline = ref(true)
 
   const fetchAudios = async () => {
     const response = await axios.get('/audioarchive')
@@ -67,6 +68,7 @@ const useAudioStore = defineStore('AudioStore', () => {
   return {
     pwaTitle,
     audios,
+    isOnline,
     fetchAudios,
     fetchAudioFile,
     addAudio,
