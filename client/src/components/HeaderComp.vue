@@ -18,7 +18,7 @@
         v-if="props.update"
         @click="$emit('updateAndReload')"
         label="Update available! Click here"
-        class="update-tab"
+        class="update-tab fade-in"
       />
     </q-tabs>
   </q-header>

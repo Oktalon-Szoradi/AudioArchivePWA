@@ -74,6 +74,20 @@ body {
   background-size: cover;
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 1s;
+}
+
 .q-card {
   backdrop-filter: blur(4px);
   background-color: hsla(211deg 64% 95% / 75%);

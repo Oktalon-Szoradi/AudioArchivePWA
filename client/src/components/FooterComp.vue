@@ -2,7 +2,7 @@
   <q-footer elevated class="nav-footer text-white">
     <q-toolbar>
       <q-btn dense flat round icon="r_menu" @click="$emit('toggleLeftDrawer')">
-        <q-badge v-if="update" class="glossy" color="red" floating>!</q-badge>
+        <q-badge v-if="update" class="glossy fade-in" color="red" floating>!</q-badge>
       </q-btn>
 
       <q-toolbar-title>

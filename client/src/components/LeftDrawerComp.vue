@@ -51,6 +51,7 @@
           @click="$emit('updateAndReload')"
           clickable
           v-ripple
+          class="fade-in"
           style="
             background: linear-gradient(
               to right,
