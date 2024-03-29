@@ -150,7 +150,7 @@
       </q-card>
     </q-dialog>
     <q-dialog v-model="editDialog">
-      <q-card style="width: 50%">
+      <q-card :style="!$q.screen.lt.sm ? 'width: 67vw': ''">
         <q-card-section>
           <div class="text-h6">Edit {{ selectedAudio.name }}</div>
         </q-card-section>
