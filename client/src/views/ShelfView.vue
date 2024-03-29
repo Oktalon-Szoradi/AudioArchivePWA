@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">Shelf</div>
+    <div class="title">shelf</div>
     <div class="q-mt-xl text-center">
       <q-table
         class="audio-table"

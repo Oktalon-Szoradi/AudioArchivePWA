@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">Settings</div>
+    <div class="title">settings</div>
     <div class="q-mt-xl text-center">
       <q-card>
         <q-card-section> There are no settings available yet. </q-card-section>

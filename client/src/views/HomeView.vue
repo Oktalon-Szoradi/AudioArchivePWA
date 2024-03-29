@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">Home</div>
+    <div class="title">home</div>
     <div class="text-center">
       <img src="/AudioArchive_Logo.svg" />
       <h4>Welcome!</h4>

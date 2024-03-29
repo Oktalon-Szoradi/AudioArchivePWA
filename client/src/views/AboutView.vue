@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">About</div>
+    <div class="title">about</div>
     <q-card class="text-center q-ma-md">
       <q-card-section>
         <b>{{ audioStore.pwaTitle }}</b>
