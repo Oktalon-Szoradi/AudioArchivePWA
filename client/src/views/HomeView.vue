@@ -117,33 +117,50 @@ const saveAudio = async () => {
   if (audioName.value.length > 32 || !audioName.value.length) {
     return
   }
-  await audioStore.addAudio(
-    audioName.value,
-    audioDescription.value,
-    audioRating.value,
-    audioTimeStamp.value,
-    audioBlob.value,
-    audioMimeType.value
-  )
-  if (audioStore.audios.find(a => new Date(a.timestamp).toString() === new Date(audioTimeStamp.value).toString())) {
-    saveDialog.value = false
-    resetFields()
-    $q.notify({
-      icon: 'done',
-      color: 'primary',
-      classes: 'glossy',
-      progress: true,
-      position: 'top',
-      message: 'Audio created successfully! Check it out in the Shelf.'
-    })
-  } else {
+  try {
+    await audioStore.addAudio(
+      audioName.value,
+      audioDescription.value,
+      audioRating.value,
+      audioTimeStamp.value,
+      audioBlob.value,
+      audioMimeType.value
+    )
+    if (
+      audioStore.audios.find(
+        a =>
+          new Date(a.timestamp).toString() === new Date(audioTimeStamp.value).toString()
+      )
+    ) {
+      saveDialog.value = false
+      resetFields()
+      $q.notify({
+        icon: 'done',
+        color: 'primary',
+        classes: 'glossy',
+        progress: true,
+        position: 'top',
+        message: 'Audio created successfully! Check it out in the Shelf.'
+      })
+    } else {
+      $q.notify({
+        icon: 'warning',
+        color: 'orange',
+        classes: 'glossy',
+        progress: true,
+        position: 'top',
+        message: 'Audio may not have been created.'
+      })
+    }
+  } catch (error) {
+    console.error(error)
     $q.notify({
       icon: 'error',
       color: 'negative',
       classes: 'glossy',
       progress: true,
       position: 'top',
-      message: 'Audio may not have been created.'
+      message: 'Failed to add audio to the archive.'
     })
   }
 }
