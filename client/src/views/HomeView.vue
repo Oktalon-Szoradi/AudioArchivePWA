@@ -117,7 +117,7 @@ const saveAudio = async () => {
   if (audioName.value.length > 32 || !audioName.value.length) {
     return
   }
-  audioStore.addAudio(
+  await audioStore.addAudio(
     audioName.value,
     audioDescription.value,
     audioRating.value,
@@ -125,16 +125,27 @@ const saveAudio = async () => {
     audioBlob.value,
     audioMimeType.value
   )
-  saveDialog.value = false
-  resetFields()
-  $q.notify({
-    icon: 'done',
-    color: 'primary',
-    classes: 'glossy',
-    progress: true,
-    position: 'top',
-    message: 'Audio created successfully! Check it out in the Shelf.'
-  })
+  if (audioStore.audios.find(a => new Date(a.timestamp).toString() === new Date(audioTimeStamp.value).toString())) {
+    saveDialog.value = false
+    resetFields()
+    $q.notify({
+      icon: 'done',
+      color: 'primary',
+      classes: 'glossy',
+      progress: true,
+      position: 'top',
+      message: 'Audio created successfully! Check it out in the Shelf.'
+    })
+  } else {
+    $q.notify({
+      icon: 'error',
+      color: 'negative',
+      classes: 'glossy',
+      progress: true,
+      position: 'top',
+      message: 'Audio may not have been created.'
+    })
+  }
 }
 
 const cancelAudio = () => {
