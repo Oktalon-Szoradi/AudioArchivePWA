@@ -10,7 +10,10 @@ export default defineConfig({
   server: {
     port: 8080,
     proxy: {
-      '/audioarchive': 'http://localhost:3000'
+      '/audioarchive': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
     }
   },
   plugins: [
@@ -48,5 +51,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    outDir: '../server/public',
+    emptyOutDir: false
   }
 })
