@@ -70,10 +70,12 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useQuasar } from 'quasar'
 import useAudioStore from '@/stores/audioStore.js'
 import RecordingCompVue from '@/components/RecordingComp.vue'
 import { AVWaveform } from 'vue-audio-visual'
 
+const $q = useQuasar()
 const audioStore = useAudioStore()
 
 const audioURL = ref('')
@@ -122,6 +124,14 @@ const saveAudio = async () => {
   )
   saveDialog.value = false
   resetFields()
+  $q.notify({
+    icon: 'done',
+    color: 'primary',
+    classes: 'glossy',
+    progress: true,
+    position: 'top',
+    message: 'Audio created successfully! Check it out in the Shelf.'
+  })
 }
 
 const cancelAudio = () => {
