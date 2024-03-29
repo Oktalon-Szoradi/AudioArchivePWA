@@ -2,9 +2,9 @@
   <div>
     <div class="title">Settings</div>
     <div class="q-mt-xl text-center">
-      <div class="q-mt-xl q-pa-md about-box text-center">
-        There are no settings available yet.
-      </div>
+      <q-card>
+        <q-card-section> There are no settings available yet. </q-card-section>
+      </q-card>
     </div>
   </div>
 </template>
@@ -14,5 +14,9 @@
 <style scoped>
 * {
   color: #3d1a78;
+}
+
+.q-card {
+  background-color: hsla(211deg 64% 95% / 50%);
 }
 </style>

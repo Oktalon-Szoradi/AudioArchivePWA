@@ -79,26 +79,8 @@ body {
   user-select: none;
 }
 
-.about-box {
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px hsl(0deg 0% 100% / 100%), 0 0 0 2px hsl(0deg 0% 0% / 50%),
-    0 0 8px black;
-  background-image: radial-gradient(
-      ellipse 100% 33% at bottom,
-      hsl(0deg 0% 0% / 15%),
-      transparent
-    ),
-    radial-gradient(ellipse at bottom left, transparent 75%, hsl(0deg 0% 100% / 75%)),
-    radial-gradient(ellipse at bottom right, transparent 75%, hsl(0deg 0% 100% / 75%)),
-    linear-gradient(
-      to bottom,
-      hsl(0deg 0% 100% / 55%),
-      hsl(0deg 0% 100% / 60%) 49%,
-      hsl(0deg 0% 100% / 50%) 51%
-    );
-  width: 90vw;
-  font-size: 1.25em;
-  backdrop-filter: blur(4px);
+a[target='_blank']::after {
+  content: url('@/assets/external\ link.svg');
 }
 
 /* NavSideBar Items Bottom-Aligned (For Mobile View) */
