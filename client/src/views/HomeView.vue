@@ -3,9 +3,12 @@
     <div class="title">home</div>
     <div class="text-center">
       <img src="/AudioArchive_Logo.svg" />
-      <h4>Welcome!</h4>
-      <p>To begin recording, just press the microphone bubble below.</p>
-      <p>Afterwards, you may give your recording a title, description, and a rating.</p>
+      <h4 style="margin: 0 0 1em;">Welcome!</h4>
+      <p>
+        To begin recording, just press the microphone bubble below.<br />
+        Afterwards, you may give your recording a title, description, and a rating.
+      </p>
+      <p><b>Notice:</b> Currently, all saved audio is public!</p>
       <RecordingCompVue @recording-complete="promptSave" />
     </div>
     <q-dialog v-model="saveDialog" persistent>

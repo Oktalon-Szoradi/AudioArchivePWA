@@ -2,9 +2,17 @@
   <BackgroundComp />
 
   <q-layout view="hHh lpR fFf">
-    <HeaderComp @toggleLeftDrawer="toggleLeftDrawer" v-if="!$q.screen.lt.sm" />
+    <HeaderComp
+      @updateAndReload="updateAndReload"
+      v-if="!$q.screen.lt.sm"
+      :update="update"
+    />
 
-    <LeftDrawerComp v-model="leftDrawerOpen" />
+    <LeftDrawerComp
+      @updateAndReload="updateAndReload"
+      v-model="leftDrawerOpen"
+      :update="update"
+    />
 
     <q-page-container>
       <q-page class="q-pa-md row justify-center">
@@ -12,7 +20,11 @@
       </q-page>
     </q-page-container>
 
-    <FooterComp @toggleLeftDrawer="toggleLeftDrawer" v-if="$q.screen.lt.sm" />
+    <FooterComp
+      @toggleLeftDrawer="toggleLeftDrawer"
+      v-if="$q.screen.lt.sm"
+      :update="update"
+    />
   </q-layout>
 </template>
 
@@ -21,11 +33,36 @@ import BackgroundComp from './components/BackgroundComp.vue'
 import HeaderComp from '@/components/HeaderComp.vue'
 import LeftDrawerComp from '@/components/LeftDrawerComp.vue'
 import FooterComp from '@/components/FooterComp.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar()
 
 const leftDrawerOpen = ref(false)
 const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value)
+
+const update = ref(false)
+
+const updateAndReload = async () => {
+  const registration = await navigator.serviceWorker.getRegistration()
+  if (registration) registration.waiting?.postMessage({ type: 'SKIP_WAITING' })
+  window.location.reload()
+}
+
+onMounted(async () => {
+  window.addEventListener('resize', () => {
+    if (!$q.screen.lt.sm) leftDrawerOpen.value = false
+  })
+
+  const registration = await navigator.serviceWorker.getRegistration()
+  if (!registration) {
+    console.log('registration failed!')
+    return
+  }
+  registration.addEventListener('updatefound', () => (update.value = true))
+  if (registration.waiting) update.value = true
+})
 </script>
 
 <style>
@@ -81,7 +118,7 @@ body {
 }
 
 a[target='_blank']::after {
-  content: url('@/assets/external\ link.svg');
+  content: url('@/assets/IconExternalLink.svg');
 }
 
 /* NavSideBar Items Bottom-Aligned (For Mobile View) */

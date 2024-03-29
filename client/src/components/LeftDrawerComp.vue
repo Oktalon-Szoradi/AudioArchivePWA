@@ -14,7 +14,7 @@
           to="/"
           clickable
           v-ripple
-          :class="this.$route.fullPath === '/' ? 'active' : ''"
+          :class="$route.fullPath === '/' ? 'active' : ''"
         >
           <q-item-section class="text-shadow">Home</q-item-section>
         </q-item>
@@ -23,7 +23,7 @@
           to="/shelf"
           clickable
           v-ripple
-          :class="this.$route.fullPath === '/shelf' ? 'active' : ''"
+          :class="$route.fullPath === '/shelf' ? 'active' : ''"
         >
           <q-item-section class="text-shadow">Shelf</q-item-section>
         </q-item>
@@ -32,7 +32,7 @@
           to="/settings"
           clickable
           v-ripple
-          :class="this.$route.fullPath === '/settings' ? 'active' : ''"
+          :class="$route.fullPath === '/settings' ? 'active' : ''"
         >
           <q-item-section class="text-shadow">Settings</q-item-section>
         </q-item>
@@ -41,16 +41,38 @@
           to="/about"
           clickable
           v-ripple
-          :class="this.$route.fullPath === '/about' ? 'active' : ''"
+          :class="$route.fullPath === '/about' ? 'active' : ''"
         >
           <q-item-section class="text-shadow">About</q-item-section>
+        </q-item>
+
+        <q-item
+          v-if="props.update"
+          @click="$emit('updateAndReload')"
+          clickable
+          v-ripple
+          style="
+            background: linear-gradient(
+              to right,
+              hsla(0deg 100% 50% / 25%),
+              hsla(0deg 100% 50% / 5%)
+            );
+          "
+        >
+          <q-item-section class="text-shadow">Update available! Tap here!</q-item-section>
         </q-item>
       </q-list>
     </q-scroll-area>
   </q-drawer>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  update: { type: Boolean, default: false }
+})
+
+defineEmits(['updateAndReload'])
+</script>
 
 <style scoped>
 .active {

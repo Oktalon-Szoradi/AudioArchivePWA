@@ -1,7 +1,9 @@
 <template>
   <q-footer elevated class="nav-footer text-white">
     <q-toolbar>
-      <q-btn dense flat round icon="r_menu" @click="$emit('toggleLeftDrawer')" />
+      <q-btn dense flat round icon="r_menu" @click="$emit('toggleLeftDrawer')">
+        <q-badge class="glossy" color="red" floating>!</q-badge>
+      </q-btn>
 
       <q-toolbar-title>
         <q-avatar>
@@ -17,6 +19,10 @@
 import useaudioStore from '@/stores/audioStore.js'
 
 const audioStore = useaudioStore()
+
+const props = defineProps({
+  update: { type: Boolean, default: false }
+})
 
 defineEmits(['toggleLeftDrawer'])
 </script>
