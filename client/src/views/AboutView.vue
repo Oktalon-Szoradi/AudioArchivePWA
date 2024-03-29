@@ -47,7 +47,7 @@
     </q-card>
     <q-card class="text-center q-ma-md">
       <q-card-section>
-        <b>Audio visualizations</b>
+        <b>Audio Visualizations</b>
       </q-card-section>
       <q-separator />
       <q-card-section>
