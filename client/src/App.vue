@@ -72,7 +72,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow-x: hidden;
 }
 
 .q-card {
@@ -107,8 +106,8 @@ body {
 }
 
 .title {
-  position: absolute;
-  top: -0.425em;
+  position: fixed;
+  top: 0;
   left: -0.075em;
   opacity: 0.05;
   z-index: -1;
@@ -121,18 +120,24 @@ a[target='_blank']::after {
   content: url('@/assets/IconExternalLink.svg');
 }
 
-/* NavSideBar Items Bottom-Aligned (For Mobile View) */
+@media (width <= 800px) {
+  .title {
+    top: 0.45em;
+    font-size: 8em;
+  }
+}
+
 @media (width <= 599px) {
+  /* NavSideBar Items Bottom-Aligned (For Mobile View) */
   /* stylelint-disable-next-line selector-class-pattern */
   .q-scrollarea__content {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
-}
 
-@media (width <= 800px) {
   .title {
+    top: -0.425em;
     font-size: 8em;
   }
 }
