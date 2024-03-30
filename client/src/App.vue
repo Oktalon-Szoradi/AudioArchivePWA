@@ -53,9 +53,18 @@ const updateAndReload = async () => {
   window.location.reload()
 }
 
+const closeDrawer = () => {
+  if (!$q.screen.lt.sm) leftDrawerOpen.value = false
+}
+
 onMounted(async () => {
-  window.addEventListener('resize', () => {
-    if (!$q.screen.lt.sm) leftDrawerOpen.value = false
+  window.addEventListener('resize', closeDrawer)
+  window.addEventListener('orientationchange', closeDrawer)
+
+  screen.orientation.addEventListener('change', event => {
+    const type = event.target.type
+    const angle = event.target.angle
+    console.log(`ScreenOrientation change: ${type}, ${angle} degrees.`)
   })
 
   window.addEventListener('online', () => (audioStore.isOnline = true))
