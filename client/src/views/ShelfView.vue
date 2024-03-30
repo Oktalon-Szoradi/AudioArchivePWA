@@ -128,6 +128,19 @@
         </q-card-section>
 
         <q-card-actions align="right">
+          <a
+            ref="downloadLink"
+            :href="audioURL"
+            :download="selectedAudio.filename"
+            style="display: none"
+          ></a>
+
+          <q-btn
+            glossy
+            label="Download"
+            color="primary"
+            @click="downloadCurrentAudio()"
+          />
           <q-btn flat label="Close" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -199,7 +212,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useQuasar } from 'quasar'
 import useAudioStore from '@/stores/audioStore.js'
 import { AVWaveform } from 'vue-audio-visual'
@@ -224,6 +237,7 @@ const newAudioRating = ref(0)
 
 const selectedAudio = ref(null)
 const audioURL = ref('')
+const downloadLink = ref(null)
 
 const playAudio = async audio => {
   selectedAudio.value = audio
@@ -231,6 +245,16 @@ const playAudio = async audio => {
   const audioBlob = await audioStore.fetchAudioFile(filename, aid)
   audioURL.value = URL.createObjectURL(audioBlob)
   audioDialog.value = true
+}
+
+const downloadCurrentAudio = () => {
+  // const a = document.createElement('a')
+  // a.href = audioURL.value
+  // a.download = selectedAudio.value.filename
+  // a.click()
+  nextTick(() => {
+    downloadLink.value.click()
+  })
 }
 
 const promptDelete = audio => {
