@@ -81,6 +81,9 @@ define(['./workbox-e21a23a0'], (function (workbox) { 'use strict';
    * See https://goo.gl/S9QRab
    */
   workbox.precacheAndRoute([{
+    "url": "assets/AboutView-DiGE-mqV.js",
+    "revision": null
+  }, {
     "url": "assets/AboutView-YmFb8C06.css",
     "revision": null
   }, {
@@ -90,7 +93,16 @@ define(['./workbox-e21a23a0'], (function (workbox) { 'use strict';
     "url": "assets/index-Blxhs7u-.css",
     "revision": null
   }, {
+    "url": "assets/index-CpRazv8m.js",
+    "revision": null
+  }, {
     "url": "assets/index-DCnmWsR4.js",
+    "revision": null
+  }, {
+    "url": "assets/index-DmaoJhAW.css",
+    "revision": null
+  }, {
+    "url": "assets/PageNotFound-CnrvgUd5.js",
     "revision": null
   }, {
     "url": "assets/PageNotFound-DeF74uG0.css",
@@ -99,7 +111,13 @@ define(['./workbox-e21a23a0'], (function (workbox) { 'use strict';
     "url": "assets/PageNotFound-Dng1ekyP.js",
     "revision": null
   }, {
+    "url": "assets/QSeparator-Blk8V0qZ.js",
+    "revision": null
+  }, {
     "url": "assets/QSeparator-CvvLKTRU.js",
+    "revision": null
+  }, {
+    "url": "assets/SettingsView-B-2P0DDj.js",
     "revision": null
   }, {
     "url": "assets/SettingsView-BnVvCb2V.css",
@@ -114,8 +132,14 @@ define(['./workbox-e21a23a0'], (function (workbox) { 'use strict';
     "url": "assets/ShelfView-DcJIUjDe.js",
     "revision": null
   }, {
+    "url": "assets/ShelfView-DDXnpVR8.js",
+    "revision": null
+  }, {
+    "url": "assets/ShelfView-SXiuSigs.css",
+    "revision": null
+  }, {
     "url": "index.html",
-    "revision": "2743c2c408cf4966c4f4c7e055767aa5"
+    "revision": "e73688b61312e47660ca188ca32d70e8"
   }, {
     "url": "registerSW.js",
     "revision": "1872c500de691dce40960bb85481de07"
