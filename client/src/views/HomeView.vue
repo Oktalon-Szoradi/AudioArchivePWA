@@ -13,6 +13,7 @@
         @recording-complete="promptSave"
         :offline="!audioStore.isOnline"
       />
+      <div v-if="!audioStore.isOnline">Audio archiving is disabled while you're offline.</div>
       <q-btn
         class="q-mt-lg"
         glossy
@@ -20,6 +21,7 @@
         label="Or upload your own audio file!"
         color="primary"
         @click="saveFileDialog = true"
+        :disable="!audioStore.isOnline"
       />
       <!-- <div class="flex flex-center">
         <q-uploader

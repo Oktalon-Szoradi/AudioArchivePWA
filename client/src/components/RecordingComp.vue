@@ -9,7 +9,6 @@
         <q-icon :name="enabled ? 'stop' : 'mic'" color="white" size="5em" />
       </div>
     </div>
-    <span v-if="offline">Audio recording is disabled while you're offline.</span>
     <div v-show="enabled" class="recording">
       <AVMedia :media="stream" type="wform" line-color="#7BADE2" />
       <p>{{ stopWatchStore.time }}</p>
