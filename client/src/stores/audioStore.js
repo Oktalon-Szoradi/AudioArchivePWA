@@ -4,7 +4,7 @@ import axios from 'axios'
 import { formatISO9075 } from 'date-fns'
 
 const useAudioStore = defineStore('AudioStore', () => {
-  const pwaTitle = ref('AudioArchive v0.2.4')
+  const pwaTitle = ref('AudioArchive v0.2.5')
   const audios = ref([])
   const isOnline = ref(true)
   const preferredAudioFormat = ref('.mp3')
