@@ -81,65 +81,44 @@ define(['./workbox-e21a23a0'], (function (workbox) { 'use strict';
    * See https://goo.gl/S9QRab
    */
   workbox.precacheAndRoute([{
-    "url": "assets/AboutView-DiGE-mqV.js",
+    "url": "assets/AboutView-B5NmEp4W.js",
     "revision": null
   }, {
     "url": "assets/AboutView-YmFb8C06.css",
     "revision": null
   }, {
-    "url": "assets/AboutView-YYIQXF94.js",
+    "url": "assets/index-BSU7TynV.css",
     "revision": null
   }, {
-    "url": "assets/index-Blxhs7u-.css",
+    "url": "assets/index-CRkqNBQv.js",
     "revision": null
   }, {
-    "url": "assets/index-CpRazv8m.js",
-    "revision": null
-  }, {
-    "url": "assets/index-DCnmWsR4.js",
-    "revision": null
-  }, {
-    "url": "assets/index-DmaoJhAW.css",
-    "revision": null
-  }, {
-    "url": "assets/PageNotFound-CnrvgUd5.js",
+    "url": "assets/PageNotFound-7XVdFCK9.js",
     "revision": null
   }, {
     "url": "assets/PageNotFound-DeF74uG0.css",
     "revision": null
   }, {
-    "url": "assets/PageNotFound-Dng1ekyP.js",
+    "url": "assets/QSeparator-D1PbfGAG.js",
     "revision": null
   }, {
-    "url": "assets/QSeparator-Blk8V0qZ.js",
+    "url": "assets/SettingsView-CoXKclrv.css",
     "revision": null
   }, {
-    "url": "assets/QSeparator-CvvLKTRU.js",
+    "url": "assets/SettingsView-DwVU-uBm.js",
     "revision": null
   }, {
-    "url": "assets/SettingsView-B-2P0DDj.js",
+    "url": "assets/ShelfView-BR91oNdA.css",
     "revision": null
   }, {
-    "url": "assets/SettingsView-BnVvCb2V.css",
+    "url": "assets/ShelfView-CHb0SMSq.js",
     "revision": null
   }, {
-    "url": "assets/SettingsView-fDJn2erg.js",
-    "revision": null
-  }, {
-    "url": "assets/ShelfView-BxxD8tQr.css",
-    "revision": null
-  }, {
-    "url": "assets/ShelfView-DcJIUjDe.js",
-    "revision": null
-  }, {
-    "url": "assets/ShelfView-DDXnpVR8.js",
-    "revision": null
-  }, {
-    "url": "assets/ShelfView-SXiuSigs.css",
+    "url": "assets/worker-lPYB70QI.js",
     "revision": null
   }, {
     "url": "index.html",
-    "revision": "e73688b61312e47660ca188ca32d70e8"
+    "revision": "117ce594f8ff04db38990edcabdcecb1"
   }, {
     "url": "registerSW.js",
     "revision": "1872c500de691dce40960bb85481de07"
