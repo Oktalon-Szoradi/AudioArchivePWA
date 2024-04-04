@@ -20,7 +20,7 @@
         push
         label="Or upload your own audio file!"
         color="primary"
-        @click="saveFileDialog = true"
+        @click="uploadFileDialog = true"
         :disable="!audioStore.isOnline"
       />
       <!-- <div class="flex flex-center">
@@ -75,8 +75,8 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-    <q-dialog v-model="saveFileDialog" persistent>
-      <q-card>
+    <q-dialog v-model="uploadFileDialog" persistent>
+      <q-card style="width: 50vw">
         <q-card-section>
           <div class="text-h6">Upload Audio File</div>
         </q-card-section>
@@ -166,7 +166,7 @@ const audioDescription = ref('')
 const audioRating = ref(0)
 
 const saveDialog = ref(false)
-const saveFileDialog = ref(false)
+const uploadFileDialog = ref(false)
 const cancelConfirmationDialog = ref(false)
 
 const makeAudioStuffFromFile = () => {
@@ -220,7 +220,7 @@ const saveAudio = async () => {
       )
     ) {
       saveDialog.value = false
-      saveFileDialog.value = false
+      uploadFileDialog.value = false
       resetFields()
       $q.notify({
         icon: 'done',
@@ -261,7 +261,7 @@ const cancelAudioFileUpload = () => {
   if (audioFile.value) {
     cancelConfirmationDialog.value = true
   } else {
-    saveFileDialog.value = false
+    uploadFileDialog.value = false
     resetFields()
   }
 }
@@ -269,7 +269,7 @@ const cancelAudioFileUpload = () => {
 const ultimatelyCancel = () => {
   cancelConfirmationDialog.value = false
   saveDialog.value = false
-  saveFileDialog.value = false
+  uploadFileDialog.value = false
   resetFields()
 }
 </script>
