@@ -13,7 +13,9 @@
         @recording-complete="promptSave"
         :offline="!audioStore.isOnline"
       />
-      <div v-if="!audioStore.isOnline">Audio archiving is disabled while you're offline.</div>
+      <div v-if="!audioStore.isOnline">
+        Audio archiving is disabled while you're offline.
+      </div>
       <q-btn
         class="q-mt-lg"
         glossy
@@ -76,7 +78,7 @@
       </q-card>
     </q-dialog>
     <q-dialog v-model="uploadFileDialog" persistent>
-      <q-card style="width: 50vw">
+      <q-card :style="!$q.screen.lt.sm ? 'width: 67vw' : 'width: 90vw'">
         <q-card-section>
           <div class="text-h6">Upload Audio File</div>
         </q-card-section>
@@ -133,7 +135,9 @@
           <div class="text-h6">Are you sure you want to cancel?</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none" v-if="!audioFile"> Your recording will be lost. </q-card-section>
+        <q-card-section class="q-pt-none" v-if="!audioFile">
+          Your recording will be lost.
+        </q-card-section>
 
         <q-card-actions align="right">
           <q-btn glossy label="Yes" color="primary" @click="ultimatelyCancel()" />
