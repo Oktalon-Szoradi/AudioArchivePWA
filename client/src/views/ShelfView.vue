@@ -130,10 +130,12 @@
         <q-card-actions align="right">
           <a
             ref="downloadLink"
-            :href="audioURL"
+            :href="audioUrlTranscoded"
             :download="selectedAudio.filename"
             style="display: none"
           ></a>
+
+          <span class="q-ma-sm">{{ ffmpegStatus }}</span>
 
           <q-btn
             glossy
@@ -217,8 +219,13 @@ import { useQuasar } from 'quasar'
 import useAudioStore from '@/stores/audioStore.js'
 import { AVWaveform } from 'vue-audio-visual'
 import { formatISO9075 } from 'date-fns'
+import { FFmpeg } from '@ffmpeg/ffmpeg'
+import { fetchFile, toBlobURL } from '@ffmpeg/util'
 
 const $q = useQuasar()
+
+const ffmpeg = new FFmpeg()
+const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm'
 
 const audioStore = useAudioStore()
 audioStore.fetchAudios()
@@ -237,7 +244,10 @@ const newAudioRating = ref(0)
 
 const selectedAudio = ref(null)
 const audioURL = ref('')
+const audioUrlTranscoded = ref('')
 const downloadLink = ref(null)
+
+const ffmpegStatus = ref('')
 
 const playAudio = async audio => {
   selectedAudio.value = audio
@@ -248,11 +258,26 @@ const playAudio = async audio => {
 }
 
 const downloadCurrentAudio = () => {
-  // const a = document.createElement('a')
-  // a.href = audioURL.value
-  // a.download = selectedAudio.value.filename
-  // a.click()
-  nextTick(() => {
+  nextTick(async () => {
+    // https://github.com/ffmpegwasm/ffmpeg.wasm/blob/main/apps/vue-vite-app/src/components/FFmpegDemo.vue
+   /*  message.value = 'Loading ffmpeg-core.js'
+    ffmpeg.on('log', ({ message: msg }) => {
+      message.value = msg
+    })
+    await ffmpeg.load({
+      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+      workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
+    })
+    message.value = 'Start transcoding'
+    await ffmpeg.writeFile(selectedAudio.filename, await fetchFile(audioURL.value))
+    await ffmpeg.exec(['-i', selectedAudio.filename, `${selectedAudio.name}.mp3`])
+    message.value = 'Complete transcoding'
+    const data = await ffmpeg.readFile(`${selectedAudio.name}.mp3`)
+    audioUrlTranscoded.value = URL.createObjectURL(
+      new Blob([data.buffer], { type: 'audio' })
+    ) */
+
     downloadLink.value.click()
   })
 }

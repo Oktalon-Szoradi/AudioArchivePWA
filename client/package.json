@@ -12,6 +12,8 @@
     "previewhost": "vite preview --port 5050 --host"
   },
   "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
     "@quasar/extras": "^1.16.9",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vueuse/core": "^10.9.0",

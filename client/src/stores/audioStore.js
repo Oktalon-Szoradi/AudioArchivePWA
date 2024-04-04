@@ -7,6 +7,7 @@ const useAudioStore = defineStore('AudioStore', () => {
   const pwaTitle = ref('AudioArchive v0.2.4')
   const audios = ref([])
   const isOnline = ref(true)
+  const preferredAudioFormat = ref('.mp3')
 
   const fetchAudios = async () => {
     const response = await axios.get('/audioarchive')
@@ -69,6 +70,7 @@ const useAudioStore = defineStore('AudioStore', () => {
     pwaTitle,
     audios,
     isOnline,
+    preferredAudioFormat,
     fetchAudios,
     fetchAudioFile,
     addAudio,
